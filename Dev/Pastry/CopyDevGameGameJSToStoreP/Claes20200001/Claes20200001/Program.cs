@@ -96,7 +96,7 @@ namespace Charlotte
 
 			Queue<string[]> q = new Queue<string[]>();
 
-			q.Enqueue(new string[] { Consts.R_ROOT_DIR });
+			q.Enqueue(Directory.GetDirectories(Consts.R_ROOT_DIR));
 
 			while (1 <= q.Count)
 			{
@@ -108,6 +108,7 @@ namespace Charlotte
 					}
 					else
 					{
+						SCommon.CreateDir(SCommon.ChangeRoot(dir, Consts.R_ROOT_DIR, WRootDir));
 						q.Enqueue(Directory.GetDirectories(dir));
 					}
 				}
@@ -122,16 +123,6 @@ namespace Charlotte
 
 		private void CopySourceDir(string projectDir)
 		{
-#if false // 不要
-			// 出力先(個別)クリア
-			{
-				string destProjectDir = SCommon.ChangeRoot(projectDir, Consts.R_ROOT_DIR, WRootDir);
-
-				SCommon.DeletePath(destProjectDir);
-				SCommon.CreateDir(destProjectDir);
-			}
-#endif
-
 			foreach (string srcLocalDir in Consts.SRC_LOCAL_DIRS)
 			{
 				string rDir = Path.Combine(projectDir, srcLocalDir);

@@ -36,7 +36,7 @@ namespace Charlotte
 		{
 			// -- choose one --
 
-			Main4(new ArgsReader(new string[] { "H" }));
+			Main4(new ArgsReader(new string[] { "E" }));
 			//new Test0001().Test01();
 			//new Test0002().Test01();
 			//new Test0003().Test01();
@@ -125,7 +125,7 @@ namespace Charlotte
 			if (alpha.Length != 1)
 				throw new Exception("Bad alpha (Length)");
 
-			if (!SCommon.ALPHA.Contains(alpha[0]))
+			if (!SCommon.ALPHA_UPPER.Contains(alpha[0]))
 				throw new Exception("Bad alpha (not A-Z)");
 
 			InputRootDir = Consts.R_ROOT_DIR;

@@ -245,7 +245,6 @@ namespace Charlotte.GameCommons
 		public static void SetRealScreenSize(int w, int h)
 		{
 			VScreen.StoreImageDataIfLoadedForAll();
-			VScreen.ChangeDrawScreenToBack();
 
 			Picture.UnloadAll();
 			VScreen.UnloadAll();

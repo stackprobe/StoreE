@@ -84,6 +84,7 @@ namespace Charlotte.Games
 
 				DD.EachFrame();
 			}
+			TitleMenu.Run();
 		}
 
 		private static void Touch()

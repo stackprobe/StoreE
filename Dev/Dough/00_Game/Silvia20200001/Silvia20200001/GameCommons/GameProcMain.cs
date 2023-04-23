@@ -242,12 +242,11 @@ namespace Charlotte.GameCommons
 		public static void SetRealScreenSize(int w, int h)
 		{
 			VScreen.StoreImageDataIfLoadedForAll();
+			VScreen.ChangeDrawScreenToBack();
 
 			Picture.UnloadAll();
 			VScreen.UnloadAll();
 			DU.UnloadAllFontHandle();
-			//Music.UnloadAll(); // アンロード不要
-			//SoundEffect.UnloadAll(); // アンロード不要
 
 			DX.SetGraphMode(w, h, 32);
 			DX.SetDrawScreen(DX.DX_SCREEN_BACK);

@@ -92,6 +92,12 @@ namespace Charlotte.Games
 				DrawWall();
 				DD.EachFrame();
 			}
+
+			Picture.UnloadAll();
+			VScreen.UnloadAll();
+			DU.UnloadAllFontHandle();
+			Music.UnloadAll();
+			SoundEffect.UnloadAll();
 		}
 
 		private static void StartTheGame()

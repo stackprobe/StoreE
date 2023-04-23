@@ -13,7 +13,11 @@ namespace Charlotte
 		{
 			if (ProcMain.DEBUG)
 			{
+#if DEBUG
 				RunOnDebug();
+#else
+				throw new Exception("DEBUG is True");
+#endif
 			}
 			else
 			{
@@ -21,11 +25,13 @@ namespace Charlotte
 			}
 		}
 
+#if DEBUG
 		private static void RunOnDebug()
 		{
 			// -- choose one --
 
-			Logo.Run();
+			GameEntrance.Run();
+			//Logo.Run();
 			//TitleMenu.Run();
 			//Game.Run();
 			//new Test0001().Test01();
@@ -34,10 +40,11 @@ namespace Charlotte
 
 			// --
 		}
+#endif
 
 		private static void RunOnRelease()
 		{
-			Logo.Run();
+			GameEntrance.Run();
 		}
 	}
 }

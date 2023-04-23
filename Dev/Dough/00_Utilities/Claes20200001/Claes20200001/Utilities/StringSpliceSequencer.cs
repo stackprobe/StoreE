@@ -31,7 +31,7 @@ namespace Charlotte.Utilities
 			}
 		}
 
-		public void Splice(int start, int removeLength, string newPart)
+		public StringSpliceSequencer Splice(int start, int removeLength, string newPart)
 		{
 			if (
 				start < 0 || this.Source.Length < start ||
@@ -46,14 +46,14 @@ namespace Charlotte.Utilities
 				)
 				throw new ArgumentException("Bad range");
 
-			SpliceInfo info = new SpliceInfo()
+			this.SpliceInfos.Add(new SpliceInfo()
 			{
 				Start = start,
 				RemoveLength = removeLength,
 				NewPart = newPart,
-			};
+			});
 
-			this.SpliceInfos.Add(info);
+			return this;
 		}
 
 		public string GetString()

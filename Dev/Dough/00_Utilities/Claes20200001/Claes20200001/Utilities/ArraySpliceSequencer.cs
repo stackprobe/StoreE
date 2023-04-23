@@ -33,17 +33,17 @@ namespace Charlotte.Utilities
 			}
 		}
 
-		public void Splice(int start, int removeLength, T[] newPart)
+		public ArraySpliceSequencer<T> Splice(int start, int removeLength, T[] newPart)
 		{
-			this.Splice(start, removeLength, newPart, 0);
+			return this.Splice(start, removeLength, newPart, 0);
 		}
 
-		public void Splice(int start, int removeLength, T[] newPartSource, int newPartStart)
+		public ArraySpliceSequencer<T> Splice(int start, int removeLength, T[] newPartSource, int newPartStart)
 		{
-			this.Splice(start, removeLength, newPartSource, newPartStart, newPartSource.Length - newPartStart);
+			return this.Splice(start, removeLength, newPartSource, newPartStart, newPartSource.Length - newPartStart);
 		}
 
-		public void Splice(int start, int removeLength, T[] newPartSource, int newPartStart, int newPartLength)
+		public ArraySpliceSequencer<T> Splice(int start, int removeLength, T[] newPartSource, int newPartStart, int newPartLength)
 		{
 			if (
 				start < 0 || this.Source.Length < start ||
@@ -60,16 +60,16 @@ namespace Charlotte.Utilities
 				)
 				throw new ArgumentException("Bad range");
 
-			SpliceInfo info = new SpliceInfo()
+			this.SpliceInfos.Add(new SpliceInfo()
 			{
 				Start = start,
 				RemoveLength = removeLength,
 				NewPartSource = newPartSource,
 				NewPartStart = newPartStart,
 				NewPartLength = newPartLength,
-			};
+			});
 
-			this.SpliceInfos.Add(info);
+			return this;
 		}
 
 		public T[] GetArray()

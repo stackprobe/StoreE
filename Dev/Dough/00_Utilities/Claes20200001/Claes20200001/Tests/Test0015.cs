@@ -254,5 +254,17 @@ namespace Charlotte.Tests
 			if (ans1 != ans2) // ? 不一致
 				throw null;
 		}
+
+		public void Test04()
+		{
+			char[] aRet = new ArraySpliceSequencer<char>("ABCxxxxxEFGHzzMN".ToArray())
+				.Splice(3, 5, "D".ToArray())
+				.Splice(12, 2, "IJKL".ToArray())
+				.GetArray();
+			string ret = new string(aRet);
+
+			if (ret != "ABCDEFGHIJKLMN")
+				throw null;
+		}
 	}
 }

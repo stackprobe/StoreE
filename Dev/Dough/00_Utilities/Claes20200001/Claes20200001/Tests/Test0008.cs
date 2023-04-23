@@ -138,5 +138,16 @@ namespace Charlotte.Tests
 			if (ans1 != ans2) // ? 不一致
 				throw null;
 		}
+
+		public void Test03()
+		{
+			string ret = new StringSpliceSequencer("ABCxxxxxEFGHzzMN")
+				.Splice(3, 5, "D")
+				.Splice(12, 2, "IJKL")
+				.GetString();
+
+			if (ret != "ABCDEFGHIJKLMN")
+				throw null;
+		}
 	}
 }

@@ -63,11 +63,12 @@ namespace Charlotte
 			//new Test0005().Test02(); // HTTPServer
 			//new Test0005().Test03(); // HTTPServer
 			//new Test0006().Test01(); // JapaneseDate
-			new Test0006().Test02(); // JapaneseDate
+			//new Test0006().Test02(); // JapaneseDate
 			//new Test0006().Test03(); // JapaneseDate
 			//new Test0007().Test01(); // BitList
 			//new Test0008().Test01(); // StringSpliceSequencer
 			//new Test0008().Test02(); // StringSpliceSequencer
+			//new Test0008().Test03(); // StringSpliceSequencer
 			//new Test0009().Test01(); // Adler32
 			//new Test0010().Test01(); // MillerRabin
 			//new Test0010().Test02(); // MillerRabin
@@ -79,6 +80,7 @@ namespace Charlotte
 			//new Test0015().Test01(); // ArraySpliceSequencer
 			//new Test0015().Test02(); // ArraySpliceSequencer
 			//new Test0015().Test03(); // ArraySpliceSequencer
+			new Test0015().Test04(); // ArraySpliceSequencer
 
 			// --
 		}

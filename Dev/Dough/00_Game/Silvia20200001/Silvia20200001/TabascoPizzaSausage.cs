@@ -23,6 +23,7 @@ namespace Charlotte
 
 		private static void RunOnDebug()
 		{
+#if DEBUG
 			// -- choose one --
 
 			Logo.Run();
@@ -33,6 +34,9 @@ namespace Charlotte
 			//new Test0003().Test01();
 
 			// --
+#else
+			throw new Exception("DEBUG is True");
+#endif
 		}
 
 		private static void RunOnRelease()

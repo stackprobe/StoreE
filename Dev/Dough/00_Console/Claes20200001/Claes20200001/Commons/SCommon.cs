@@ -1467,7 +1467,7 @@ namespace Charlotte.Commons
 
 			public bool Contains(UInt16 code)
 			{
-				return (this.CodeMap[code / 64] & (UInt64)1 << (code % 64)) != (UInt64)0;
+				return (this.CodeMap[code / 64] & ((UInt64)1 << (code % 64))) != (UInt64)0;
 			}
 		}
 

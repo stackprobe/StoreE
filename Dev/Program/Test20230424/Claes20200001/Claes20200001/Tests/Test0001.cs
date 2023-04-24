@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.IO;
 using Charlotte.Commons;
 
 namespace Charlotte.Tests
@@ -11,7 +12,7 @@ namespace Charlotte.Tests
 	{
 		public void Test01()
 		{
-			// none
+			File.WriteAllBytes(SCommon.NextOutputPath() + ".txt", SCommon.GetJCharBytes().ToArray());
 		}
 	}
 }

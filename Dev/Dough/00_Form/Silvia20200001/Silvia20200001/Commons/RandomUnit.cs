@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Security.Cryptography;
 
 namespace Charlotte.Commons
 {
@@ -30,16 +29,29 @@ namespace Charlotte.Commons
 		}
 
 		private byte[] Cache = SCommon.EMPTY_BYTES;
-		private int RIndex = 0;
+		private int NextIndex = 0;
 
 		public byte GetByte()
 		{
-			if (this.Cache.Length <= this.RIndex)
+			if (this.Cache.Length <= this.NextIndex)
 			{
 				this.Cache = this.Rng.GetBlock();
-				this.RIndex = 0;
+				this.NextIndex = 0;
 			}
-			return this.Cache[this.RIndex++];
+			return this.Cache[this.NextIndex++];
+		}
+
+		private byte BitCache;
+		private int NextBitIndex = 8;
+
+		private int GetBit()
+		{
+			if (8 <= this.NextBitIndex)
+			{
+				this.BitCache = this.GetByte();
+				this.NextBitIndex = 0;
+			}
+			return (this.BitCache >> this.NextBitIndex++) & 1;
 		}
 
 		public byte[] GetBytes(int length)
@@ -99,17 +111,17 @@ namespace Charlotte.Commons
 
 		public ulong GetULong_M(ulong modulo)
 		{
-			if (modulo == 0ul)
+			if (modulo == 0)
 				throw new Exception("Bad modulo");
 
-			ulong m = (ulong.MaxValue % modulo + 1ul) % modulo;
+			ulong t = (ulong.MaxValue % modulo + 1) % modulo;
 			ulong r;
 
 			do
 			{
 				r = this.GetULong();
 			}
-			while (r < m);
+			while (r < t);
 
 			r %= modulo;
 
@@ -142,7 +154,7 @@ namespace Charlotte.Commons
 		/// <returns>真偽値</returns>
 		public bool GetBoolean()
 		{
-			return this.GetInt(2) == 1;
+			return this.GetBit() != 0;
 		}
 
 		/// <summary>
@@ -151,7 +163,7 @@ namespace Charlotte.Commons
 		/// <returns>-1 または 1</returns>
 		public int GetSign()
 		{
-			return this.GetInt(2) * 2 - 1;
+			return this.GetBit() * 2 - 1;
 		}
 
 		/// <summary>

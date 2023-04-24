@@ -14,5 +14,13 @@ namespace Charlotte.Tests
 		{
 			File.WriteAllBytes(SCommon.NextOutputPath() + ".txt", SCommon.GetJCharBytes().ToArray());
 		}
+
+		public void Test02()
+		{
+			for (int c = 0; c < 50; c++)
+			{
+				Console.WriteLine(SCommon.CRandom.GetBoolean());
+			}
+		}
 	}
 }

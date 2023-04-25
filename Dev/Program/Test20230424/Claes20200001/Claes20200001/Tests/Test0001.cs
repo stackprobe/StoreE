@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 using Charlotte.Commons;
 
 namespace Charlotte.Tests
@@ -62,6 +63,15 @@ namespace Charlotte.Tests
 				throw null;
 
 			Console.WriteLine("OK");
+		}
+
+		public void Test04()
+		{
+			Exception ex = SCommon.ToThrow(() => SCommon.Hex.I.ToBytes("xxx"));
+
+			Console.WriteLine("" + ex);
+
+			MessageBox.Show("" + ex);
 		}
 	}
 }

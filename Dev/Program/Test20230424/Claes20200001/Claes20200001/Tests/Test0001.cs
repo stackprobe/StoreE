@@ -71,7 +71,7 @@ namespace Charlotte.Tests
 
 			Console.WriteLine("" + ex);
 
-			MessageBox.Show("" + ex);
+			MessageBox.Show(ex.Message, "AAAA / Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
 }

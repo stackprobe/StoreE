@@ -332,5 +332,26 @@ namespace Charlotte.Tests
 
 			Console.WriteLine("OK");
 		}
+
+		public void Test10()
+		{
+			char[] TEST_CHARS = (SCommon.HALF + SCommon.MBC_ASCII + "いろはにほへと日本語漢字").ToArray();
+
+			for (int index = 0; index < 1000; index++)
+			{
+				if (index % 100 == 0) Console.WriteLine("" + index); // cout
+
+				string[] lines = Enumerable.Range(0, SCommon.CRandom.GetInt(300))
+					.Select(dummy1 => new string(Enumerable.Range(0, SCommon.CRandom.GetInt(300)).Select(dummy2 => SCommon.CRandom.ChooseOne(TEST_CHARS)).ToArray()))
+					.ToArray();
+
+				string str = SCommon.Serializer.I.Join(lines);
+				string[] retLines = SCommon.Serializer.I.Split(str);
+
+				if (SCommon.Comp(lines, retLines, SCommon.Comp) != 0)
+					throw null;
+			}
+			Console.WriteLine("OK!");
+		}
 	}
 }

@@ -73,5 +73,19 @@ namespace Charlotte.Tests
 
 			MessageBox.Show(ex.Message, "AAAA / Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
+
+		public void Test05()
+		{
+			for (int c = 0; c < 10000; c++)
+			{
+				byte[] data = SCommon.CRandom.GetBytes(SCommon.CRandom.GetInt(1000));
+				string str = SCommon.Hex.I.ToString(data);
+				byte[] retData = SCommon.Hex.I.ToBytes(str);
+
+				if (SCommon.Comp(data, retData) != 0)
+					throw null;
+			}
+			Console.WriteLine("OK!");
+		}
 	}
 }

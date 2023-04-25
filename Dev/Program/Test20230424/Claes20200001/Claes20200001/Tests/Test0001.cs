@@ -87,5 +87,62 @@ namespace Charlotte.Tests
 			}
 			Console.WriteLine("OK!");
 		}
+
+		public void Test06()
+		{
+			Test06_a();
+			Test06_b();
+			Test06_b2();
+
+			Console.WriteLine("OK!");
+		}
+
+		private void Test06_a()
+		{
+			for (int c = 0; c < 10000; c++)
+			{
+				byte[] data = SCommon.CRandom.GetBytes(SCommon.CRandom.GetInt(1000));
+				string str = SCommon.Base64.I.Encode(data);
+				byte[] retData = SCommon.Base64.I.Decode(str);
+
+				if (SCommon.Comp(data, retData) != 0)
+					throw null;
+			}
+			Console.WriteLine("OK");
+		}
+
+		private void Test06_b()
+		{
+			char[] TEST_CHARS = (SCommon.HALF + SCommon.MBC_ASCII + "いろはにほへと日本語漢字").ToArray();
+
+			for (int c = 0; c < 10000; c++)
+			{
+				string str = new string(Enumerable.Range(0, SCommon.CRandom.GetInt(1000)).Select(dummy => SCommon.CRandom.ChooseOne(TEST_CHARS)).ToArray());
+
+				// でたらめな文字列でも例外を投げずに何らかのバイト列を返すはず。
+				//
+				byte[] retData = SCommon.Base64.I.Decode(str);
+
+				if (retData == null)
+					throw null;
+			}
+			Console.WriteLine("OK");
+		}
+
+		private void Test06_b2()
+		{
+			for (int c = 0; c < 10000; c++)
+			{
+				string str = new string(Enumerable.Range(0, SCommon.CRandom.GetInt(1000)).Select(dummy => (char)SCommon.CRandom.GetInt(0x10000)).ToArray());
+
+				// でたらめな文字列でも例外を投げずに何らかのバイト列を返すはず。
+				//
+				byte[] retData = SCommon.Base64.I.Decode(str);
+
+				if (retData == null)
+					throw null;
+			}
+			Console.WriteLine("OK");
+		}
 	}
 }

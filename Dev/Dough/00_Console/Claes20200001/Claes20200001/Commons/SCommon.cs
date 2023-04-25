@@ -2128,14 +2128,15 @@ namespace Charlotte.Commons
 			private char[] Chars;
 			private byte[] CharMap;
 
+			private const char CHAR_MAX = 'z';
 			private const char CHAR_PADDING = '=';
 
 			private Base64()
 			{
 				this.Chars = (SCommon.ALPHA_UPPER + SCommon.ALPHA_LOWER + SCommon.DECIMAL + "+/").ToArray();
-				this.CharMap = new byte[(int)char.MaxValue + 1];
+				this.CharMap = new byte[(int)CHAR_MAX + 1];
 
-				for (int index = 0; index <= (int)char.MaxValue; index++)
+				for (int index = 0; index <= (int)CHAR_MAX; index++)
 					this.CharMap[index] = 0xff;
 
 				for (int index = 0; index < 64; index++)
@@ -2154,6 +2155,9 @@ namespace Charlotte.Commons
 			/// <returns>Base64</returns>
 			public string Encode(byte[] src)
 			{
+				if (src == null)
+					throw new Exception("不正な引数");
+
 				char[] dest = new char[((src.Length + 2) / 3) * 4];
 				int writer = 0;
 				int index = 0;
@@ -2214,10 +2218,13 @@ namespace Charlotte.Commons
 			/// <returns>元のバイト列</returns>
 			public byte[] Decode(string src)
 			{
+				if (src == null)
+					throw new Exception("不正な引数");
+
 				// パディング除去
 				// 空白・改行などの不要な文字を除去する。
 				{
-					src = new string(src.Where(v => this.CharMap[(int)v] != 0xff).ToArray());
+					src = new string(src.Where(v => (int)v <= (int)CHAR_MAX && this.CharMap[(int)v] != 0xff).ToArray());
 				}
 
 				int destSize = (int)(((long)src.Length * 3) / 4);

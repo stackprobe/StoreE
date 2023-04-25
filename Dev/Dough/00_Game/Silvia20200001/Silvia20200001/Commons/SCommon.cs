@@ -2152,7 +2152,7 @@ namespace Charlotte.Commons
 			public string Encode(byte[] data)
 			{
 				if (data == null)
-					throw new Exception("不正なパラメータ");
+					data = SCommon.EMPTY_BYTES;
 
 				string str;
 
@@ -2202,10 +2202,16 @@ namespace Charlotte.Commons
 				return buff.ToString();
 			}
 
+			/// <summary>
+			/// Base32をデコードする。
+			/// 注意：入力文字列がでたらめな内容であっても、例外を投げずに何らかのバイト列を返す。
+			/// </summary>
+			/// <param name="str">入力文字列</param>
+			/// <returns>バイト列</returns>
 			public byte[] Decode(string str)
 			{
 				if (str == null)
-					throw new Exception("不正な引数");
+					str = "";
 
 				str = new string(str.Where(chr => (int)chr < CHAR_MAP_SIZE && this.CharMap[(int)chr] != -1).ToArray());
 
@@ -2305,15 +2311,21 @@ namespace Charlotte.Commons
 			public string Encode(byte[] data)
 			{
 				if (data == null)
-					throw new Exception("不正なパラメータ");
+					data = SCommon.EMPTY_BYTES;
 
 				return Convert.ToBase64String(data);
 			}
 
+			/// <summary>
+			/// Base64をデコードする。
+			/// 注意：入力文字列がでたらめな内容であっても、例外を投げずに何らかのバイト列を返す。
+			/// </summary>
+			/// <param name="str">入力文字列</param>
+			/// <returns>バイト列</returns>
 			public byte[] Decode(string str)
 			{
 				if (str == null)
-					throw new Exception("不正なパラメータ");
+					str = "";
 
 				str = str.Replace(CHAR_URL_62, this.Chars[62]);
 				str = str.Replace(CHAR_URL_63, this.Chars[63]);

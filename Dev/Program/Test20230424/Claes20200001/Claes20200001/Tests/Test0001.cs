@@ -235,5 +235,68 @@ namespace Charlotte.Tests
 		{
 			Console.WriteLine(title + " ==> " + string.Join("", hs.OrderBy(SCommon.Comp)));
 		}
+
+		public void Test08()
+		{
+			Test08_a();
+			Test08_b();
+			Test08_b2();
+
+			Console.WriteLine("OK!");
+		}
+
+		private void Test08_a()
+		{
+			for (int c = 0; c < 10000; c++)
+			{
+				byte[] data = SCommon.CRandom.GetBytes(SCommon.CRandom.GetInt(1000));
+				string str = SCommon.Base32.I.Encode(data);
+				byte[] retData = SCommon.Base32.I.Decode(str);
+
+				if (!Regex.IsMatch(str, @"^[A-Z2-7]*={0,6}$"))
+					throw null;
+
+				if (str.Length % 8 != 0)
+					throw null;
+
+				if (SCommon.Comp(data, retData) != 0)
+					throw null;
+			}
+			Console.WriteLine("OK");
+		}
+
+		private void Test08_b()
+		{
+			char[] TEST_CHARS = (SCommon.HALF + SCommon.MBC_ASCII + "いろはにほへと日本語漢字").ToArray();
+
+			for (int c = 0; c < 10000; c++)
+			{
+				string str = new string(Enumerable.Range(0, SCommon.CRandom.GetInt(1000)).Select(dummy => SCommon.CRandom.ChooseOne(TEST_CHARS)).ToArray());
+
+				// でたらめな文字列でも例外を投げずに何らかのバイト列を返すはず。
+				//
+				byte[] retData = SCommon.Base32.I.Decode(str);
+
+				if (retData == null)
+					throw null;
+			}
+			Console.WriteLine("OK");
+		}
+
+		private void Test08_b2()
+		{
+			for (int c = 0; c < 10000; c++)
+			{
+				string str = new string(Enumerable.Range(0, SCommon.CRandom.GetInt(1000)).Select(dummy => (char)SCommon.CRandom.GetInt(0x10000)).ToArray());
+
+				// でたらめな文字列でも例外を投げずに何らかのバイト列を返すはず。
+				//
+				byte[] retData = SCommon.Base32.I.Decode(str);
+
+				if (retData == null)
+					throw null;
+			}
+			Console.WriteLine("OK");
+		}
 	}
 }

@@ -298,5 +298,39 @@ namespace Charlotte.Tests
 			}
 			Console.WriteLine("OK");
 		}
+
+		public void Test09()
+		{
+			Test09_a("foobar", "MZXW6YTBOI======");
+			Test09_a("fooba", "MZXW6YTB");
+			Test09_a("foob", "MZXW6YQ=");
+			Test09_a("foo", "MZXW6===");
+			Test09_a("fo", "MZXQ====");
+			Test09_a("f", "MY======");
+			Test09_a("", "");
+			Test09_a("      ", "EAQCAIBAEA======");
+			Test09_a("     ", "EAQCAIBA");
+			Test09_a("    ", "EAQCAIA=");
+			Test09_a("   ", "EAQCA===");
+			Test09_a("  ", "EAQA====");
+			Test09_a(" ", "EA======");
+
+			Console.WriteLine("OK!");
+		}
+
+		private void Test09_a(string asciiString, string assumeBase32)
+		{
+			Console.WriteLine("< {" + asciiString + "}");
+			Console.WriteLine("A " + assumeBase32);
+
+			string base32 = SCommon.Base32.I.Encode(Encoding.ASCII.GetBytes(asciiString));
+
+			Console.WriteLine("> " + base32);
+
+			if (base32 != assumeBase32)
+				throw null;
+
+			Console.WriteLine("OK");
+		}
 	}
 }

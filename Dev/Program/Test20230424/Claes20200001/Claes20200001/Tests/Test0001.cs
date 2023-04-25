@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Drawing;
 using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Drawing;
 using System.Windows.Forms;
 using Charlotte.Commons;
 
@@ -105,6 +106,12 @@ namespace Charlotte.Tests
 				string str = SCommon.Base64.I.Encode(data);
 				byte[] retData = SCommon.Base64.I.Decode(str);
 
+				if (!Regex.IsMatch(str, @"^[A-Za-z0-9\+/]*={0,2}$"))
+					throw null;
+
+				if (str.Length % 4 != 0)
+					throw null;
+
 				if (SCommon.Comp(data, retData) != 0)
 					throw null;
 			}
@@ -143,6 +150,90 @@ namespace Charlotte.Tests
 					throw null;
 			}
 			Console.WriteLine("OK");
+		}
+
+		public void Test07()
+		{
+			HashSet<string> hs = SCommon.CreateSet();
+
+			byte[] data = new byte[0];
+
+			while (data.Length < 4)
+			{
+				// Increment
+				{
+					for (int index = 0; ; index++)
+					{
+						if (data.Length <= index)
+						{
+							data = data.Concat(new byte[1] { 0 }).ToArray();
+							break;
+						}
+						if (data[index] < 255)
+						{
+							data[index]++;
+							break;
+						}
+						data[index] = 0;
+					}
+				}
+
+				//Console.WriteLine(SCommon.Hex.I.ToString(data) + " ==> " + SCommon.Base64.I.Encode(data));
+
+				string str = SCommon.Base64.I.Encode(data);
+				str = str.Substring(str.Length - 4);
+
+				hs.Add(str);
+			}
+
+			//File.WriteAllLines(SCommon.NextOutputPath() + ".txt", hs.ToArray(), Encoding.ASCII);
+
+			HashSet<string> h21 = SCommon.CreateSet();
+			HashSet<string> h22 = SCommon.CreateSet();
+			HashSet<string> h31 = SCommon.CreateSet();
+			HashSet<string> h32 = SCommon.CreateSet();
+			HashSet<string> h33 = SCommon.CreateSet();
+			HashSet<string> h41 = SCommon.CreateSet();
+			HashSet<string> h42 = SCommon.CreateSet();
+			HashSet<string> h43 = SCommon.CreateSet();
+			HashSet<string> h44 = SCommon.CreateSet();
+
+			foreach (string str in hs)
+			{
+				if (str.EndsWith("=="))
+				{
+					h21.Add("" + str[0]);
+					h22.Add("" + str[1]);
+				}
+				else if (str.EndsWith("="))
+				{
+					h31.Add("" + str[0]);
+					h32.Add("" + str[1]);
+					h33.Add("" + str[2]);
+				}
+				else
+				{
+					h41.Add("" + str[0]);
+					h42.Add("" + str[1]);
+					h43.Add("" + str[2]);
+					h44.Add("" + str[3]);
+				}
+			}
+
+			Test07_a("h21", h21);
+			Test07_a("h22", h22);
+			Test07_a("h31", h31);
+			Test07_a("h32", h32);
+			Test07_a("h33", h33);
+			Test07_a("h41", h41);
+			Test07_a("h42", h42);
+			Test07_a("h43", h43);
+			Test07_a("h44", h44);
+		}
+
+		private void Test07_a(string title, HashSet<string> hs)
+		{
+			Console.WriteLine(title + " ==> " + string.Join("", hs.OrderBy(SCommon.Comp)));
 		}
 	}
 }

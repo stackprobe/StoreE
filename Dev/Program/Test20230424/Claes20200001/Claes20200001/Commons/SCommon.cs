@@ -2108,42 +2108,39 @@ namespace Charlotte.Commons
 			return Process.Start(psi);
 		}
 
-		#region Base64
+		#region Base32
 
-		public class Base64
+		public class Base32
 		{
-			private static Base64 _i = null;
+			private static Base32 _i = null;
 
-			public static Base64 I
+			public static Base32 I
 			{
 				get
 				{
 					if (_i == null)
-						_i = new Base64();
+						_i = new Base32();
 
 					return _i;
 				}
 			}
 
-			private char[] Chars;
-			private byte[] CharMap;
+			private const int CHAR_MAP_SIZE = 0x80;
 
-			private const char CHAR_MAX = 'z';
 			private const char CHAR_PADDING = '=';
 
-			private Base64()
+			private char[] Chars;
+			private int[] CharMap;
+
+			private Base32()
 			{
-				this.Chars = (SCommon.ALPHA_UPPER + SCommon.ALPHA_LOWER + SCommon.DECIMAL + "+/").ToArray();
-				this.CharMap = new byte[(int)CHAR_MAX + 1];
+				this.Chars = (SCommon.ALPHA_UPPER + SCommon.DECIMAL.Substring(1, 6)).ToArray();
+				this.CharMap = new int[0x80];
 
-				for (int index = 0; index <= (int)CHAR_MAX; index++)
-					this.CharMap[index] = 0xff;
-
-				for (int index = 0; index < 64; index++)
-					this.CharMap[this.Chars[index]] = (byte)index;
-
-				this.CharMap['-'] = 62; // Base64 URL Encode の 63 番目の文字
-				this.CharMap['_'] = 63; // Base64 URL Encode の 64 番目の文字
+				for (int index = 0; index < this.Chars.Length; index++)
+				{
+					this.CharMap[(int)this.Chars[index]] = index;
+				}
 			}
 
 			/// <summary>
@@ -2224,7 +2221,7 @@ namespace Charlotte.Commons
 				// パディング除去
 				// 空白・改行などの不要な文字を除去する。
 				{
-					src = new string(src.Where(v => (int)v <= (int)CHAR_MAX && this.CharMap[(int)v] != 0xff).ToArray());
+					//src = new string(src.Where(v => (int)v <= (int)CHAR_MAX && this.CharMap[(int)v] != 0xff).ToArray());
 				}
 
 				int destSize = (int)(((long)src.Length * 3) / 4);
@@ -2258,6 +2255,107 @@ namespace Charlotte.Commons
 					dest[writer++] = (byte)chr;
 				}
 				return dest;
+			}
+		}
+
+		#endregion
+
+		#region Base64
+
+		public class Base64
+		{
+			private static Base64 _i = null;
+
+			public static Base64 I
+			{
+				get
+				{
+					if (_i == null)
+						_i = new Base64();
+
+					return _i;
+				}
+			}
+
+			private const int CHAR_MAP_SIZE = 0x80;
+
+			private const char CHAR_PADDING = '=';
+			private const char CHAR_URL_62 = '-';
+			private const char CHAR_URL_63 = '_';
+
+			private char[] Chars;
+			private int[] CharMap;
+
+			private Base64()
+			{
+				this.Chars = (SCommon.ALPHA_UPPER + SCommon.ALPHA_LOWER + SCommon.DECIMAL + "+/").ToArray();
+				this.CharMap = new int[CHAR_MAP_SIZE];
+
+				for (int index = 0; index < CHAR_MAP_SIZE; index++)
+					this.CharMap[index] = -1;
+
+				for (int index = 0; index < this.Chars.Length; index++)
+					this.CharMap[(int)this.Chars[index]] = index;
+			}
+
+			public string Encode(byte[] data)
+			{
+				if (data == null)
+					throw new Exception("不正なパラメータ");
+
+				return Convert.ToBase64String(data);
+			}
+
+			public string EncodeURL(byte[] data)
+			{
+				string str = Encode(data);
+
+				str = str.Replace(new string(new char[] { CHAR_PADDING }), "");
+				str = str.Replace(this.Chars[62], CHAR_URL_62);
+				str = str.Replace(this.Chars[63], CHAR_URL_63);
+
+				return str;
+			}
+
+			public byte[] Decode(string str)
+			{
+				if (str == null)
+					throw new Exception("不正なパラメータ");
+
+				str = str.Replace(CHAR_URL_62, this.Chars[62]);
+				str = str.Replace(CHAR_URL_63, this.Chars[63]);
+				str = new string(str.Where(chr => (int)chr < CHAR_MAP_SIZE && this.CharMap[(int)chr] != -1).ToArray());
+
+				switch (str.Length % 4)
+				{
+					case 0:
+						break;
+
+					case 1:
+						str = str.Substring(0, str.Length - 1); // 端数1はあり得ないので切り捨てる。
+						break;
+
+					case 2:
+						if (this.CharMap[(int)str[str.Length - 1]] % 16 != 0) // ? 端数2のときのあり得ない最後の文字
+						{
+							str = str.Substring(0, str.Length - 2); // 端数を切り捨てる。
+						}
+						break;
+
+					case 3:
+						if (this.CharMap[(int)str[str.Length - 1]] % 4 != 0) // ? 端数3のときのあり得ない最後の文字
+						{
+							str = str.Substring(0, str.Length - 3); // 端数を切り捨てる。
+						}
+						break;
+
+					default:
+						throw null; // never
+				}
+
+				str += new string(CHAR_PADDING, (4 - str.Length % 4) % 4);
+
+				return Convert.FromBase64String(str);
 			}
 		}
 

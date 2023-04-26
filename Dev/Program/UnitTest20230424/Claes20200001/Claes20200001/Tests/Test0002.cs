@@ -8,7 +8,7 @@ using Charlotte.Commons;
 
 namespace Charlotte.Tests
 {
-	public class Test0001
+	public class Test0002
 	{
 		public void Test01()
 		{
@@ -17,15 +17,15 @@ namespace Charlotte.Tests
 				if (testcnt % 1000 == 0) Console.WriteLine("" + testcnt); // cout
 
 				byte[] data = SCommon.CRandom.GetBytes(SCommon.CRandom.GetInt(1000));
-				string str = SCommon.Base32.I.Encode(data);
+				string str = SCommon.Base64.I.Encode(data);
 
 				if (str == null)
 					throw null;
 
-				if (!Regex.IsMatch(str, "^[A-Z2-7]*=*$"))
+				if (!Regex.IsMatch(str, "^[A-Za-z0-9+/]*=*$"))
 					throw null;
 
-				byte[] retData = SCommon.Base32.I.Decode(str);
+				byte[] retData = SCommon.Base64.I.Decode(str);
 
 				if (retData == null)
 					throw null;

@@ -18,7 +18,7 @@ MakeID512.exe
 	B-62-88        523.*          22 * 4 = A ; 62 P @A L 2
 	B-36-100-U/L   516.*          25 * 4 = A ; 36 P @A L 2
 	B-26-110-U/L   517.*          22 * 5 = A ; 26 P @A L 2
-	B-16-128-L/U   512            32 * 4 = A ; 16 P @A L 2
+	B-16-128-U/L   512            32 * 4 = A ; 16 P @A L 2
 	B-10-155       514.*          31 * 5 = A ; 10 P @A L 2
 
 
@@ -70,15 +70,6 @@ B-26-110-L ⇒
 		Y ... アルファベット小文字 (a-z)
 
 
-B-16-128-L ⇒
-
-	{bf80-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY}
-	      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	                   32文字                           32文字                           32文字                           32文字
-
-		Y ... 16進数 (0-9, a-f)
-
-
 B-16-128-U ⇒
 
 	{BF80-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY}
@@ -86,6 +77,15 @@ B-16-128-U ⇒
 	                   32文字                           32文字                           32文字                           32文字
 
 		Y ... 16進数 (0-9, A-F)
+
+
+B-16-128-L ⇒
+
+	{bf80-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY}
+	      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	                   32文字                           32文字                           32文字                           32文字
+
+		Y ... 16進数 (0-9, a-f)
 
 
 B-10-155 ⇒

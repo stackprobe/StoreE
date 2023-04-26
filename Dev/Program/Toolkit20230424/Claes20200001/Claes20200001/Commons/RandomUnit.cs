@@ -51,25 +51,6 @@ namespace Charlotte.Commons
 			return dest;
 		}
 
-		public uint GetUInt16()
-		{
-			byte[] r = GetBytes(2);
-
-			return
-				((uint)r[0] << 0) |
-				((uint)r[1] << 8);
-		}
-
-		public uint GetUInt24()
-		{
-			byte[] r = GetBytes(3);
-
-			return
-				((uint)r[0] << 0) |
-				((uint)r[1] << 8) |
-				((uint)r[2] << 16);
-		}
-
 		public uint GetUInt()
 		{
 			byte[] r = GetBytes(4);
@@ -141,7 +122,7 @@ namespace Charlotte.Commons
 		/// <returns>真偽値</returns>
 		public bool GetBoolean()
 		{
-			return (this.GetByte() & 1) != 0;
+			return this.GetInt(2) != 0;
 		}
 
 		/// <summary>
@@ -150,7 +131,7 @@ namespace Charlotte.Commons
 		/// <returns>-1 または 1</returns>
 		public int GetSign()
 		{
-			return (this.GetByte() & 1) * 2 - 1;
+			return this.GetInt(2) * 2 - 1;
 		}
 
 		/// <summary>

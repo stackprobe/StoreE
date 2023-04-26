@@ -29,29 +29,16 @@ namespace Charlotte.Commons
 		}
 
 		private byte[] Cache = SCommon.EMPTY_BYTES;
-		private int NextIndex = 0;
+		private int NextRdIndex = 0;
 
 		public byte GetByte()
 		{
-			if (this.Cache.Length <= this.NextIndex)
+			if (this.Cache.Length <= this.NextRdIndex)
 			{
 				this.Cache = this.Rng.GetBlock();
-				this.NextIndex = 0;
+				this.NextRdIndex = 0;
 			}
-			return this.Cache[this.NextIndex++];
-		}
-
-		private byte BitCache;
-		private int NextBitIndex = 8;
-
-		private int GetBit()
-		{
-			if (8 <= this.NextBitIndex)
-			{
-				this.BitCache = this.GetByte();
-				this.NextBitIndex = 0;
-			}
-			return (this.BitCache >> this.NextBitIndex++) & 1;
+			return this.Cache[this.NextRdIndex++];
 		}
 
 		public byte[] GetBytes(int length)
@@ -154,7 +141,7 @@ namespace Charlotte.Commons
 		/// <returns>真偽値</returns>
 		public bool GetBoolean()
 		{
-			return this.GetBit() != 0;
+			return (this.GetByte() & 1) != 0;
 		}
 
 		/// <summary>
@@ -163,7 +150,7 @@ namespace Charlotte.Commons
 		/// <returns>-1 または 1</returns>
 		public int GetSign()
 		{
-			return this.GetBit() * 2 - 1;
+			return (this.GetByte() & 1) * 2 - 1;
 		}
 
 		/// <summary>

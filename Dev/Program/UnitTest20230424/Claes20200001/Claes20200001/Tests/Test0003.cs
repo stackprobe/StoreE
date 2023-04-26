@@ -74,5 +74,89 @@ namespace Charlotte.Tests
 				// noop
 			}
 		}
+
+		public void Test02()
+		{
+			for (int testcnt = 0; testcnt < 1000; testcnt++)
+			{
+				//if (testcnt % 100 == 0) Console.WriteLine("" + testcnt); // cout
+
+				uint[] table = Enumerable.Range(0, SCommon.CRandom.GetRange(1, 300)).Select(dummy => SCommon.CRandom.GetUInt()).ToArray();
+
+				RandomUnit ru = new RandomUnit(new RandomNumberGenerator_02() { Table = table });
+
+				//for (int c = 0; c < 100; c++)
+				foreach (uint value in table)
+					if (ru.GetUInt() != value)
+						throw null;
+			}
+			Console.WriteLine("OK!");
+		}
+
+		private class RandomNumberGenerator_02 : RandomUnit.IRandomNumberGenerator
+		{
+			public uint[] Table;
+
+			public byte[] GetBlock()
+			{
+				return SCommon.Join(this.Table.Select(value => new byte[]
+				{
+					(byte)(value & 0xff),
+					(byte)((value >> 8) & 0xff),
+					(byte)((value >> 16) & 0xff),
+					(byte)((value >> 24) & 0xff),
+				})
+				.ToArray());
+			}
+
+			public void Dispose()
+			{
+				// noop
+			}
+		}
+
+		public void Test03()
+		{
+			for (int testcnt = 0; testcnt < 1000; testcnt++)
+			{
+				//if (testcnt % 100 == 0) Console.WriteLine("" + testcnt); // cout
+
+				ulong[] table = Enumerable.Range(0, SCommon.CRandom.GetRange(1, 300)).Select(dummy => SCommon.CRandom.GetULong()).ToArray();
+
+				RandomUnit ru = new RandomUnit(new RandomNumberGenerator_03() { Table = table });
+
+				//for (int c = 0; c < 100; c++)
+				foreach (ulong value in table)
+					if (ru.GetULong() != value)
+						throw null;
+			}
+			Console.WriteLine("OK!");
+		}
+
+		private class RandomNumberGenerator_03 : RandomUnit.IRandomNumberGenerator
+		{
+			public ulong[] Table;
+
+			public byte[] GetBlock()
+			{
+				return SCommon.Join(this.Table.Select(value => new byte[]
+				{
+					(byte)(value & 0xff),
+					(byte)((value >> 8) & 0xff),
+					(byte)((value >> 16) & 0xff),
+					(byte)((value >> 24) & 0xff),
+					(byte)((value >> 32) & 0xff),
+					(byte)((value >> 40) & 0xff),
+					(byte)((value >> 48) & 0xff),
+					(byte)((value >> 56) & 0xff),
+				})
+				.ToArray());
+			}
+
+			public void Dispose()
+			{
+				// noop
+			}
+		}
 	}
 }

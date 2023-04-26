@@ -35,5 +35,32 @@ namespace Charlotte.Tests
 			}
 			Console.WriteLine("OK!");
 		}
+
+		public void Test02()
+		{
+			Test02_a(SCommon.ALPHA_UPPER + SCommon.ALPHA_LOWER + SCommon.DECIMAL + "+/");
+			Test02_a(SCommon.ASCII);
+			Test02_a(SCommon.HALF);
+			Test02_a(SCommon.HALF + SCommon.MBC_ASCII);
+			Test02_a(SCommon.HALF + SCommon.MBC_ASCII + "いろはにほへと★日本語");
+
+			Console.WriteLine("OK!");
+		}
+
+		private void Test02_a(string testChars)
+		{
+			char[] TEST_CHARS = testChars.ToArray();
+
+			for (int testcnt = 0; testcnt < 10000; testcnt++)
+			{
+				string str = new string(Enumerable.Range(0, SCommon.CRandom.GetInt(1000)).Select(dummy => SCommon.CRandom.ChooseOne(TEST_CHARS)).ToArray());
+
+				byte[] data = SCommon.Base64.I.Decode(str); // でたらめな入力文字列
+
+				if (data == null)
+					throw null;
+			}
+			Console.WriteLine("OK");
+		}
 	}
 }

@@ -55,10 +55,14 @@ namespace Charlotte
 			// -- choose one --
 
 			//new Test0001().Test01(); // SCommon.Base32
+			//new Test0001().Test02(); // SCommon.Base32
 			//new Test0002().Test01(); // SCommon.Base64
+			//new Test0002().Test02(); // SCommon.Base64
 			//new Test0003().Test01(); // RandomUnit
 			//new Test0003().Test02(); // RandomUnit
-			new Test0003().Test03(); // RandomUnit
+			//new Test0003().Test03(); // RandomUnit
+			//new Test0004().Test01(); // SCommon.Serializer
+			new Test0005().Test01(); // SCommon.Hex
 
 			// --
 		}

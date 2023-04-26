@@ -76,19 +76,19 @@ namespace Charlotte
 				);
 		}
 
-		private void BtnB16128L_Click(object sender, EventArgs e)
-		{
-			this.MakeID(
-				"{bf80-################################-################################-################################-################################}",
-				SCommon.HEXADECIMAL_LOWER
-				);
-		}
-
 		private void BtnB16128U_Click(object sender, EventArgs e)
 		{
 			this.MakeID(
 				"{BF80-################################-################################-################################-################################}",
 				SCommon.HEXADECIMAL_UPPER
+				);
+		}
+
+		private void BtnB16128L_Click(object sender, EventArgs e)
+		{
+			this.MakeID(
+				"{bf80-################################-################################-################################-################################}",
+				SCommon.HEXADECIMAL_LOWER
 				);
 		}
 

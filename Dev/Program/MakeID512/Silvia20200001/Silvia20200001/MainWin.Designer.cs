@@ -71,12 +71,10 @@
 			// 
 			// BtnB16128L
 			// 
-			this.BtnB16128L.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.BtnB16128L.ForeColor = System.Drawing.Color.Navy;
-			this.BtnB16128L.Location = new System.Drawing.Point(630, 45);
+			this.BtnB16128L.Location = new System.Drawing.Point(630, 106);
 			this.BtnB16128L.Name = "BtnB16128L";
 			this.BtnB16128L.Size = new System.Drawing.Size(200, 55);
-			this.BtnB16128L.TabIndex = 6;
+			this.BtnB16128L.TabIndex = 7;
 			this.BtnB16128L.Text = "B-16-128-L";
 			this.BtnB16128L.UseVisualStyleBackColor = true;
 			this.BtnB16128L.Click += new System.EventHandler(this.BtnB16128L_Click);
@@ -168,10 +166,12 @@
 			// 
 			// BtnB16128U
 			// 
-			this.BtnB16128U.Location = new System.Drawing.Point(630, 106);
+			this.BtnB16128U.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.BtnB16128U.ForeColor = System.Drawing.Color.Navy;
+			this.BtnB16128U.Location = new System.Drawing.Point(630, 45);
 			this.BtnB16128U.Name = "BtnB16128U";
 			this.BtnB16128U.Size = new System.Drawing.Size(200, 55);
-			this.BtnB16128U.TabIndex = 7;
+			this.BtnB16128U.TabIndex = 6;
 			this.BtnB16128U.Text = "B-16-128-U";
 			this.BtnB16128U.UseVisualStyleBackColor = true;
 			this.BtnB16128U.Click += new System.EventHandler(this.BtnB16128U_Click);

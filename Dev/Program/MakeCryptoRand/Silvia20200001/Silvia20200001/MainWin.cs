@@ -10,29 +10,12 @@ using System.IO;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using Charlotte.Commons;
+using Charlotte.GUICommons;
 
 namespace Charlotte
 {
 	public partial class MainWin : Form
 	{
-		#region WndProc
-
-		[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-		protected override void WndProc(ref Message m)
-		{
-			const int WM_SYSCOMMAND = 0x112;
-			const long SC_CLOSE = 0xF060L;
-
-			if (m.Msg == WM_SYSCOMMAND && (m.WParam.ToInt64() & 0xFFF0L) == SC_CLOSE)
-			{
-				this.BeginInvoke((MethodInvoker)this.CloseWindow);
-				return;
-			}
-			base.WndProc(ref m);
-		}
-
-		#endregion
-
 		public MainWin()
 		{
 			InitializeComponent();
@@ -47,52 +30,12 @@ namespace Charlotte
 
 		private void MainWin_Load(object sender, EventArgs e)
 		{
-			Ground.I = new Ground();
+			// none
 		}
 
 		private void MainWin_Shown(object sender, EventArgs e)
 		{
-			Common.PostShown(this);
-
-			this.Idling = true;
-		}
-
-		private void MainWin_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			this.Idling = false; // 念のため -- this.CloseWindow()
-		}
-
-		/// <summary>
-		/// フォームを閉じる。
-		/// </summary>
-		private void CloseWindow()
-		{
-			this.Idling = false;
-			this.Close();
-		}
-
-		/// <summary>
-		/// タイマーイベントを発火して良いか
-		/// -- 初期値：false
-		/// -- フォームを表示し終えてから、フォームを閉る前まで true にする。
-		/// -- その間、タイマーイベントを抑止したい時だけ false にする。
-		/// </summary>
-		private bool Idling = false;
-
-		private void MainTimer_Tick(object sender, EventArgs e)
-		{
-			if (!this.Idling)
-				return;
-
-			this.Idling = false;
-			try
-			{
-				// none
-			}
-			finally
-			{
-				this.Idling = true;
-			}
+			GUICommon.PostShown(this);
 		}
 
 		private void RandStatus_Click(object sender, EventArgs e)
@@ -134,6 +77,12 @@ namespace Charlotte
 			// noop
 		}
 
+		private void BtnReset_Click(object sender, EventArgs e)
+		{
+			this.Combo桁数.SelectedIndex = 3;
+			this.Numb行数.Value = 32;
+		}
+
 		private void MessageLabel_Click(object sender, EventArgs e)
 		{
 			// noop
@@ -165,7 +114,7 @@ namespace Charlotte
 			// 乱数生成
 			byte[][] cryptoRandBytesList = Enumerable.Range(0, rowcnt).Select(dummy => SCommon.CRandom.GetBytes(colcnt / 2)).ToArray();
 
-			string text = SCommon.LinesToText(cryptoRandBytesList.Select(cryptoRandBytes => SCommon.Hex.ToString(cryptoRandBytes)).ToArray());
+			string text = SCommon.LinesToText(cryptoRandBytesList.Select(cryptoRandBytes => SCommon.Hex.I.ToString(cryptoRandBytes)).ToArray());
 			this.RandText.Text = text;
 			Clipboard.SetText(text);
 
@@ -203,21 +152,11 @@ namespace Charlotte
 			this.MessageLabel.Text = "[" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff") + "] " + message;
 		}
 
-		private void Btn行数_5_Click(object sender, EventArgs e)
-		{
-			this.Numb行数.Value = 5;
-		}
-
-		private void Btn行数_32_Click(object sender, EventArgs e)
-		{
-			this.Numb行数.Value = 32;
-		}
-
 		private void BtnSave_Click(object sender, EventArgs e)
 		{
 			if (this.RandText.Text == "") // ? 生成_未実行
 			{
-				MessageBox.Show("先に生成を実行して下さい。", "なんか無理", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show("生成を実行して下さい。", "保存できません", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
 			string file = this.SaveCRandomFileDialog();
@@ -226,7 +165,7 @@ namespace Charlotte
 			{
 				File.WriteAllText(file, this.RandText.Text, Encoding.ASCII);
 
-				MessageBox.Show("ファイルを出力しました。", "情報", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("ファイルを出力しました。", "保存しました", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 		}
 

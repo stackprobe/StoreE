@@ -28,9 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWin));
-			this.MainTimer = new System.Windows.Forms.Timer(this.components);
 			this.RandText = new System.Windows.Forms.TextBox();
 			this.RandStatus = new System.Windows.Forms.Label();
 			this.BtnGenRand = new System.Windows.Forms.Button();
@@ -40,16 +38,10 @@
 			this.Label行数 = new System.Windows.Forms.Label();
 			this.Combo桁数 = new System.Windows.Forms.ComboBox();
 			this.Label桁数 = new System.Windows.Forms.Label();
-			this.Btn行数_5 = new System.Windows.Forms.Button();
-			this.Btn行数_32 = new System.Windows.Forms.Button();
 			this.BtnSave = new System.Windows.Forms.Button();
+			this.BtnReset = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.Numb行数)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// MainTimer
-			// 
-			this.MainTimer.Enabled = true;
-			this.MainTimer.Tick += new System.EventHandler(this.MainTimer_Tick);
 			// 
 			// RandText
 			// 
@@ -83,7 +75,7 @@
 			this.BtnGenRand.Location = new System.Drawing.Point(636, 638);
 			this.BtnGenRand.Name = "BtnGenRand";
 			this.BtnGenRand.Size = new System.Drawing.Size(120, 60);
-			this.BtnGenRand.TabIndex = 10;
+			this.BtnGenRand.TabIndex = 9;
 			this.BtnGenRand.Text = "生成";
 			this.BtnGenRand.UseVisualStyleBackColor = true;
 			this.BtnGenRand.Click += new System.EventHandler(this.BtnGenRand_Click);
@@ -94,7 +86,7 @@
 			this.BtnClear.Location = new System.Drawing.Point(762, 638);
 			this.BtnClear.Name = "BtnClear";
 			this.BtnClear.Size = new System.Drawing.Size(120, 60);
-			this.BtnClear.TabIndex = 11;
+			this.BtnClear.TabIndex = 10;
 			this.BtnClear.Text = "クリア";
 			this.BtnClear.UseVisualStyleBackColor = true;
 			this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
@@ -106,7 +98,7 @@
 			this.MessageLabel.Location = new System.Drawing.Point(12, 681);
 			this.MessageLabel.Name = "MessageLabel";
 			this.MessageLabel.Size = new System.Drawing.Size(98, 20);
-			this.MessageLabel.TabIndex = 8;
+			this.MessageLabel.TabIndex = 7;
 			this.MessageLabel.Text = "MessageLabel";
 			this.MessageLabel.Click += new System.EventHandler(this.MessageLabel_Click);
 			// 
@@ -172,47 +164,34 @@
 			this.Label桁数.Text = "桁数：";
 			this.Label桁数.Click += new System.EventHandler(this.Label桁数_Click);
 			// 
-			// Btn行数_5
-			// 
-			this.Btn行数_5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.Btn行数_5.Location = new System.Drawing.Point(402, 638);
-			this.Btn行数_5.Name = "Btn行数_5";
-			this.Btn行数_5.Size = new System.Drawing.Size(28, 28);
-			this.Btn行数_5.TabIndex = 6;
-			this.Btn行数_5.Text = "5";
-			this.Btn行数_5.UseVisualStyleBackColor = true;
-			this.Btn行数_5.Click += new System.EventHandler(this.Btn行数_5_Click);
-			// 
-			// Btn行数_32
-			// 
-			this.Btn行数_32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.Btn行数_32.Location = new System.Drawing.Point(436, 638);
-			this.Btn行数_32.Name = "Btn行数_32";
-			this.Btn行数_32.Size = new System.Drawing.Size(38, 28);
-			this.Btn行数_32.TabIndex = 7;
-			this.Btn行数_32.Text = "32";
-			this.Btn行数_32.UseVisualStyleBackColor = true;
-			this.Btn行数_32.Click += new System.EventHandler(this.Btn行数_32_Click);
-			// 
 			// BtnSave
 			// 
 			this.BtnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.BtnSave.Location = new System.Drawing.Point(510, 638);
 			this.BtnSave.Name = "BtnSave";
 			this.BtnSave.Size = new System.Drawing.Size(120, 60);
-			this.BtnSave.TabIndex = 9;
+			this.BtnSave.TabIndex = 8;
 			this.BtnSave.Text = "保存";
 			this.BtnSave.UseVisualStyleBackColor = true;
 			this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
+			// 
+			// BtnReset
+			// 
+			this.BtnReset.Location = new System.Drawing.Point(402, 638);
+			this.BtnReset.Name = "BtnReset";
+			this.BtnReset.Size = new System.Drawing.Size(60, 28);
+			this.BtnReset.TabIndex = 6;
+			this.BtnReset.Text = "Reset";
+			this.BtnReset.UseVisualStyleBackColor = true;
+			this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
 			// 
 			// MainWin
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(894, 710);
+			this.Controls.Add(this.BtnReset);
 			this.Controls.Add(this.BtnSave);
-			this.Controls.Add(this.Btn行数_32);
-			this.Controls.Add(this.Btn行数_5);
 			this.Controls.Add(this.Label桁数);
 			this.Controls.Add(this.Combo桁数);
 			this.Controls.Add(this.Label行数);
@@ -232,7 +211,6 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "MakeCryptoRand";
 			this.TopMost = true;
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWin_FormClosed);
 			this.Load += new System.EventHandler(this.MainWin_Load);
 			this.Shown += new System.EventHandler(this.MainWin_Shown);
 			((System.ComponentModel.ISupportInitialize)(this.Numb行数)).EndInit();
@@ -243,7 +221,6 @@
 
 		#endregion
 
-		private System.Windows.Forms.Timer MainTimer;
 		private System.Windows.Forms.TextBox RandText;
 		private System.Windows.Forms.Label RandStatus;
 		private System.Windows.Forms.Button BtnGenRand;
@@ -253,9 +230,8 @@
 		private System.Windows.Forms.Label Label行数;
 		private System.Windows.Forms.ComboBox Combo桁数;
 		private System.Windows.Forms.Label Label桁数;
-		private System.Windows.Forms.Button Btn行数_5;
-		private System.Windows.Forms.Button Btn行数_32;
 		private System.Windows.Forms.Button BtnSave;
+		private System.Windows.Forms.Button BtnReset;
 	}
 }
 

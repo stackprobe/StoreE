@@ -109,10 +109,10 @@
 			// 
 			this.BtnMkUUID.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.BtnMkUUID.ForeColor = System.Drawing.Color.Navy;
-			this.BtnMkUUID.Location = new System.Drawing.Point(424, 127);
+			this.BtnMkUUID.Location = new System.Drawing.Point(424, 66);
 			this.BtnMkUUID.Name = "BtnMkUUID";
 			this.BtnMkUUID.Size = new System.Drawing.Size(200, 55);
-			this.BtnMkUUID.TabIndex = 6;
+			this.BtnMkUUID.TabIndex = 5;
 			this.BtnMkUUID.Text = "UUID";
 			this.BtnMkUUID.UseVisualStyleBackColor = true;
 			this.BtnMkUUID.Click += new System.EventHandler(this.BtnMkUUID_Click);
@@ -123,17 +123,17 @@
 			this.BtnClear.Location = new System.Drawing.Point(672, 66);
 			this.BtnClear.Name = "BtnClear";
 			this.BtnClear.Size = new System.Drawing.Size(100, 55);
-			this.BtnClear.TabIndex = 8;
+			this.BtnClear.TabIndex = 7;
 			this.BtnClear.Text = "Clear";
 			this.BtnClear.UseVisualStyleBackColor = true;
 			this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
 			// 
 			// MkRand
 			// 
-			this.MkRand.Location = new System.Drawing.Point(424, 66);
+			this.MkRand.Location = new System.Drawing.Point(424, 127);
 			this.MkRand.Name = "MkRand";
 			this.MkRand.Size = new System.Drawing.Size(200, 55);
-			this.MkRand.TabIndex = 5;
+			this.MkRand.TabIndex = 6;
 			this.MkRand.Text = "[0-9a-f]{32}";
 			this.MkRand.UseVisualStyleBackColor = true;
 			this.MkRand.Click += new System.EventHandler(this.MkRand_Click);
@@ -149,7 +149,7 @@
 			this.groupBox1.Location = new System.Drawing.Point(12, 188);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(760, 98);
-			this.groupBox1.TabIndex = 7;
+			this.groupBox1.TabIndex = 8;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "指定した長さのパスワード";
 			// 

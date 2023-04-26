@@ -41,6 +41,19 @@ namespace Charlotte.Commons
 			return this.Cache[this.NextRdIndex++];
 		}
 
+		private int Bits;
+		private int BitPos = 8;
+
+		public int GetBit()
+		{
+			if (8 <= this.BitPos)
+			{
+				this.Bits = this.GetByte();
+				this.BitPos = 0;
+			}
+			return (this.Bits >> this.BitPos++) & 1;
+		}
+
 		public byte[] GetBytes(int length)
 		{
 			byte[] dest = new byte[length];
@@ -122,7 +135,7 @@ namespace Charlotte.Commons
 		/// <returns>真偽値</returns>
 		public bool GetBoolean()
 		{
-			return this.GetInt(2) != 0;
+			return this.GetBit() != 0;
 		}
 
 		/// <summary>
@@ -131,7 +144,7 @@ namespace Charlotte.Commons
 		/// <returns>-1 または 1</returns>
 		public int GetSign()
 		{
-			return this.GetInt(2) * 2 - 1;
+			return this.GetBit() * 2 - 1;
 		}
 
 		/// <summary>

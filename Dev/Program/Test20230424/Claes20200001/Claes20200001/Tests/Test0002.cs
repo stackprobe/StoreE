@@ -91,16 +91,22 @@ namespace Charlotte.Tests
 
 			public Test03_RNG_02(bool[] table)
 			{
-				this.Generator = SCommon.Supplier(this.E_BytesGenerator(table));
+				this.Generator =
+					SCommon.Supplier(this.E_BytesGenerator(
+						SCommon.Supplier(this.E_ByteGenerator(
+							SCommon.Supplier(this.E_Endless(
+								table
+								))
+							))
+						, () => SCommon.CRandom.GetRange(1, 100)
+						));
 			}
 
-			private IEnumerable<byte[]> E_BytesGenerator(bool[] table)
+			private IEnumerable<byte[]> E_BytesGenerator(Func<byte> byteGenerator, Func<int> sizeGenerator)
 			{
-				Func<byte> byteGenerator = SCommon.Supplier(this.E_ByteGenerator(table));
-
 				for (; ; )
 				{
-					int size = SCommon.CRandom.GetRange(1, 100);
+					int size = sizeGenerator();
 					byte[] data = new byte[size];
 
 					for (int c = 0; c < size; c++)
@@ -110,10 +116,8 @@ namespace Charlotte.Tests
 				}
 			}
 
-			private IEnumerable<byte> E_ByteGenerator(bool[] table)
+			private IEnumerable<byte> E_ByteGenerator(Func<bool> bitGenerator)
 			{
-				Func<bool> bitGenerator = SCommon.Supplier(this.E_Endless(table));
-
 				for (; ; )
 				{
 					int value = 0;

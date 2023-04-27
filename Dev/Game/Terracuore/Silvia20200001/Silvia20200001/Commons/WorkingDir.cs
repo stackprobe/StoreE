@@ -61,7 +61,7 @@ namespace Charlotte.Commons
 				if (
 					!string.IsNullOrEmpty(dir) &&
 					SCommon.IsFairFullPath(dir) &&
-					!dir.Contains(' ') &&
+					!dir.Contains('\u0020') && !dir.Contains('\u3000') && // 空白を含まないこと。
 					Directory.Exists(dir)
 					)
 					return dir;

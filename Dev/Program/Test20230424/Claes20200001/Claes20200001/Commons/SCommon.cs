@@ -790,19 +790,17 @@ namespace Charlotte.Commons
 			const string CHRS_NG = "\"*/:<>?\\|";
 			const string CHR_ALT = "_";
 
-			str = SCommon.ToJString(str, true, false, false, true);
+			byte[] bytes = SCommon.GetSJISBytes(str);
 
 			if (dirSize != -1)
 			{
 				int maxLen = Math.Max(0, MY_PATH_MAX - dirSize);
-				byte[] bytes = SCommon.GetSJISBytes(str);
 
 				if (maxLen < bytes.Length)
-				{
 					bytes = SCommon.GetPart(bytes, 0, maxLen);
-					str = SCommon.ToJString(bytes, true, false, false, true);
-				}
 			}
+			str = SCommon.ToJString(bytes, true, false, false, true);
+
 			string[] words = str.Split('.');
 
 			for (int index = 0; index < words.Length; index++)
@@ -873,12 +871,12 @@ namespace Charlotte.Commons
 
 		public static bool IsAbsRootDir(string path)
 		{
-			return path != null && Regex.IsMatch(path, "^[A-Za-z]:\\\\$");
+			return Regex.IsMatch(path, "^[A-Za-z]:\\\\$");
 		}
 
 		public static bool IsFairFullPathWithoutAbsRootDir(string path)
 		{
-			return path != null && Regex.IsMatch(path, "^[A-Za-z]:\\\\.+$") && IsFairRelPath(path.Substring(3), 3);
+			return Regex.IsMatch(path, "^[A-Za-z]:\\\\.+$") && IsFairRelPath(path.Substring(3), 3);
 		}
 
 		public static string ToCreatablePath(string path)
@@ -1160,7 +1158,7 @@ namespace Charlotte.Commons
 		public static string ToJString(string str, bool okJpn, bool okRet, bool okTab, bool okSpc)
 		{
 			if (str == null)
-				str = "";
+				str = ""; // HACK: null許容チェック廃止検討
 
 			return ToJString(GetSJISBytes(str), okJpn, okRet, okTab, okSpc);
 		}
@@ -1251,7 +1249,7 @@ namespace Charlotte.Commons
 		public static string ToJString(byte[] src, bool okJpn, bool okRet, bool okTab, bool okSpc)
 		{
 			if (src == null)
-				src = new byte[0];
+				src = EMPTY_BYTES; // HACK: null許容チェック廃止検討
 
 			using (MemoryStream dest = new MemoryStream())
 			{
@@ -2178,7 +2176,7 @@ namespace Charlotte.Commons
 			public string Encode(byte[] data)
 			{
 				if (data == null)
-					data = SCommon.EMPTY_BYTES;
+					data = SCommon.EMPTY_BYTES; // HACK: null許容チェック廃止検討
 
 				string str;
 
@@ -2237,7 +2235,7 @@ namespace Charlotte.Commons
 			public byte[] Decode(string str)
 			{
 				if (str == null)
-					str = "";
+					str = ""; // HACK: null許容チェック廃止検討
 
 				str = new string(str.Where(chr => (int)chr < CHAR_MAP_SIZE && this.CharMap[(int)chr] != -1).ToArray());
 
@@ -2328,7 +2326,7 @@ namespace Charlotte.Commons
 			public string Encode(byte[] data)
 			{
 				if (data == null)
-					data = SCommon.EMPTY_BYTES;
+					data = SCommon.EMPTY_BYTES; // HACK: null許容チェック廃止検討
 
 				return Convert.ToBase64String(data);
 			}
@@ -2342,7 +2340,7 @@ namespace Charlotte.Commons
 			public byte[] Decode(string str)
 			{
 				if (str == null)
-					str = "";
+					str = ""; // HACK: null許容チェック廃止検討
 
 				str = new string(str.Where(chr => (int)chr < CHAR_MAP_SIZE && this.CharMap[(int)chr] != -1).ToArray());
 

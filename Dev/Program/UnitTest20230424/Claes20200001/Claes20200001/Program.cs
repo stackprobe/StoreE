@@ -62,7 +62,9 @@ namespace Charlotte
 			//new Test0003().Test02(); // RandomUnit
 			//new Test0003().Test03(); // RandomUnit
 			//new Test0004().Test01(); // SCommon.Serializer
-			new Test0005().Test01(); // SCommon.Hex
+			//new Test0005().Test01(); // SCommon.Hex
+			//new Test0006().Test01(); // SCommon.TimeStampToSec
+			new Test0006().Test02(); // SCommon.TimeStampToSec
 
 			// --
 		}

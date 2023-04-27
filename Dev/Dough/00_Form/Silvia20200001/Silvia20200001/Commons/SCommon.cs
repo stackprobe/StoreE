@@ -1569,19 +1569,19 @@ namespace Charlotte.Commons
 		{
 			public static Hex I = new Hex();
 
-			private int[] CharMap;
+			private int[] HexChar2Value;
 
 			private Hex()
 			{
-				this.CharMap = new int[(int)'f' + 1];
+				this.HexChar2Value = new int[(int)'f' + 1];
 
 				for (int index = 0; index < 10; index++)
-					this.CharMap[(int)'0' + index] = index;
+					this.HexChar2Value[(int)'0' + index] = index;
 
 				for (int index = 0; index < 6; index++)
 				{
-					this.CharMap[(int)'A' + index] = 10 + index;
-					this.CharMap[(int)'a' + index] = 10 + index;
+					this.HexChar2Value[(int)'A' + index] = 10 + index;
+					this.HexChar2Value[(int)'a' + index] = 10 + index;
 				}
 			}
 
@@ -1614,8 +1614,8 @@ namespace Charlotte.Commons
 
 				for (int index = 0; index < dest.Length; index++)
 				{
-					int hi = this.CharMap[(int)src[index * 2 + 0]];
-					int lw = this.CharMap[(int)src[index * 2 + 1]];
+					int hi = this.HexChar2Value[(int)src[index * 2 + 0]];
+					int lw = this.HexChar2Value[(int)src[index * 2 + 1]];
 
 					dest[index] = (byte)((hi << 4) | lw);
 				}

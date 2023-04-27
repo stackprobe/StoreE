@@ -64,7 +64,8 @@ namespace Charlotte
 			//new Test0004().Test01(); // SCommon.Serializer
 			//new Test0005().Test01(); // SCommon.Hex
 			//new Test0006().Test01(); // SCommon.TimeStampToSec
-			new Test0006().Test02(); // SCommon.TimeStampToSec
+			//new Test0006().Test02(); // SCommon.TimeStampToSec
+			new Test0007().Test01(); // WorkingDir
 
 			// --
 		}

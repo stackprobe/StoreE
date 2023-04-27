@@ -11,14 +11,27 @@ namespace Charlotte.Tests
 		public void Test01()
 		{
 			Test01_a("AAABBBCCC", 'B', 2, 6);
-			Test01_a("BBBBBBBB", 'B', -1, 8);
-			Test01_a("ABBBBBC", 'B', 0, 6);
-			Test01_a("AAACCC", 'B', 2, 3);
-			Test01_a("AABCC", 'B', 1, 3);
-			Test01_a("AAAA", 'B', 3, 4);
+			Test01_a("BBBBBBCCC", 'B', -1, 6);
+			Test01_a("AAABBBBBB", 'B', 2, 9);
+			Test01_a("BBBBBBBBB", 'B', -1, 9);
+			Test01_a("AAAAAAAAA", 'B', 8, 9);
+			Test01_a("CCCCCCCCC", 'B', -1, 0);
+			Test01_a("AAACCCCCC", 'B', 2, 3);
+			Test01_a("AAAAAACCC", 'B', 5, 6);
+			Test01_a("ABC", 'B', 0, 2);
+			Test01_a("BBC", 'B', -1, 2);
+			Test01_a("ABB", 'B', 0, 3);
+			Test01_a("BBB", 'B', -1, 3);
+			Test01_a("AAA", 'B', 2, 3);
 			Test01_a("CCC", 'B', -1, 0);
+			Test01_a("ACC", 'B', 0, 1);
+			Test01_a("AAC", 'B', 1, 2);
+			Test01_a("AC", 'B', 0, 1);
+			Test01_a("BC", 'B', -1, 1);
 			Test01_a("AB", 'B', 0, 2);
+			Test01_a("A", 'B', 0, 1);
 			Test01_a("B", 'B', -1, 1);
+			Test01_a("C", 'B', -1, 0);
 			Test01_a("", 'B', -1, 0);
 
 			Console.WriteLine("OK!");

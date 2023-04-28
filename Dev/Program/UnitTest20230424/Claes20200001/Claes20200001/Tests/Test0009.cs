@@ -151,5 +151,72 @@ namespace Charlotte.Tests
 			}
 			Console.WriteLine("OK");
 		}
+
+		public void Test04()
+		{
+			Test04_a(30000, 10, 300000);
+			Test04_a(10000, 30, 100000);
+			Test04_a(3000, 100, 30000);
+			Test04_a(1000, 300, 10000);
+			Test04_a(300, 1000, 3000);
+			Test04_a(100, 3000, 1000);
+			Test04_a(30, 10000, 300);
+			Test04_a(10, 30000, 100);
+
+			// ----
+
+			Test04_a(300000, 100, 30000);
+			Test04_a(100000, 300, 10000);
+			Test04_a(30000, 1000, 3000);
+			Test04_a(10000, 3000, 1000);
+			Test04_a(3000, 10000, 300);
+			Test04_a(1000, 30000, 100);
+			Test04_a(300, 100000, 30);
+			Test04_a(100, 300000, 10);
+
+			// ----
+
+			Console.WriteLine("OK!");
+		}
+
+		private void Test04_a(int valueScale, int lengthScale, int testCount)
+		{
+			Console.WriteLine(string.Join(", ", "TEST-0009-04", valueScale, lengthScale, testCount)); // cout
+
+			for (int testcnt = 0; testcnt < testCount; testcnt++)
+			{
+				List<int> list = new List<int>();
+				int length = SCommon.CRandom.GetRange(1, lengthScale);
+
+				while (list.Count < length)
+					list.Add(SCommon.CRandom.GetInt(valueScale));
+
+				list.Sort((a, b) => a - b);
+
+				int i = SCommon.CRandom.GetInt(list.Count);
+
+				int target = list[i];
+
+				int l = i;
+				int r = i;
+
+				do l--; while (0 <= l && list[l] == target);
+				do r++; while (r < list.Count && list[r] == target);
+
+				int expectRange_L = l;
+				int expectRange_R = r;
+
+				// ----
+
+				int[] range = SCommon.GetRange(list, target, (a, b) => a - b);
+
+				if (
+					range[0] != expectRange_L ||
+					range[1] != expectRange_R
+					)
+					throw null;
+			}
+			Console.WriteLine("OK");
+		}
 	}
 }

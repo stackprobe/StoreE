@@ -37,28 +37,28 @@ namespace Charlotte
 
 		private void Main3()
 		{
-			string docRoot = @"..\..\..\..\dat\DocRoot";
-
+			// テスト系 -- リリース版では使用しない。
+#if DEBUG
 			// -- choose one --
 
 			//Main4(new ArgsReader(new string[] { }));
-			//Main4(new ArgsReader(new string[] { docRoot }));
-			//Main4(new ArgsReader(new string[] { docRoot, "80" }));
-			Main4(new ArgsReader(new string[] { docRoot, "80", "/K" }));
-			//Main4(new ArgsReader(new string[] { docRoot, "80", "/T", @"C:\temp\1.tsv" }));
-			//Main4(new ArgsReader(new string[] { docRoot, "80", "/T", @"C:\temp\1.tsv", "/K" }));
-			//Main4(new ArgsReader(new string[] { docRoot, "80", "/K", "/T", @"C:\temp\1.tsv" }));
-			//Main4(new ArgsReader(new string[] { docRoot, "80", "/K", "/T", @"C:\temp\1.tsv" }));
-			//Main4(new ArgsReader(new string[] { docRoot, "80", "/K", "/T", @"C:\temp\1.tsv", "/H", @"C:\temp\2.tsv" }));
-			//Main4(new ArgsReader(new string[] { docRoot, "80", "/K", "/H", @"C:\temp\2.tsv" }));
-			//Main4(new ArgsReader(new string[] { docRoot, "8080", "/K", "/T", @"C:\temp\1.tsv", "/H", @"C:\temp\2.tsv" }));
-			//Main4(new ArgsReader(new string[] { docRoot, "80", "/K", "/N", @"C:\temp\1.html" }));
+			//Main4(new ArgsReader(new string[] { @"..\..\..\..\dat\DocRoot" }));
+			//Main4(new ArgsReader(new string[] { @"..\..\..\..\dat\DocRoot", "80" }));
+			Main4(new ArgsReader(new string[] { @"..\..\..\..\dat\DocRoot", "80", "/K" }));
+			//Main4(new ArgsReader(new string[] { @"..\..\..\..\dat\DocRoot", "80", "/T", @"C:\temp\1.tsv" }));
+			//Main4(new ArgsReader(new string[] { @"..\..\..\..\dat\DocRoot", "80", "/T", @"C:\temp\1.tsv", "/K" }));
+			//Main4(new ArgsReader(new string[] { @"..\..\..\..\dat\DocRoot", "80", "/K", "/T", @"C:\temp\1.tsv" }));
+			//Main4(new ArgsReader(new string[] { @"..\..\..\..\dat\DocRoot", "80", "/K", "/T", @"C:\temp\1.tsv" }));
+			//Main4(new ArgsReader(new string[] { @"..\..\..\..\dat\DocRoot", "80", "/K", "/T", @"C:\temp\1.tsv", "/H", @"C:\temp\2.tsv" }));
+			//Main4(new ArgsReader(new string[] { @"..\..\..\..\dat\DocRoot", "80", "/K", "/H", @"C:\temp\2.tsv" }));
+			//Main4(new ArgsReader(new string[] { @"..\..\..\..\dat\DocRoot", "8080", "/K", "/T", @"C:\temp\1.tsv", "/H", @"C:\temp\2.tsv" }));
+			//Main4(new ArgsReader(new string[] { @"..\..\..\..\dat\DocRoot", "80", "/K", "/N", @"C:\temp\1.html" }));
 			//new Test0001().Test01();
 			//new Test0001().Test02();
 			//new Test0001().Test03();
 
 			// --
-
+#endif
 			SCommon.Pause();
 		}
 

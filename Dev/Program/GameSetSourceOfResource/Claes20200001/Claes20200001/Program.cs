@@ -34,6 +34,8 @@ namespace Charlotte
 
 		private void Main3()
 		{
+			// テスト系 -- リリース版では使用しない。
+#if DEBUG
 			// -- choose one --
 
 			Main4(new ArgsReader(new string[] { @"C:\Dev\Game\00_Game\Resource", @"C:\Dev\Game\00_Game\doc\Readme.txt", @"C:\temp\Readme.txt" }));
@@ -42,7 +44,7 @@ namespace Charlotte
 			//new Test0003().Test01();
 
 			// --
-
+#endif
 			SCommon.Pause();
 		}
 

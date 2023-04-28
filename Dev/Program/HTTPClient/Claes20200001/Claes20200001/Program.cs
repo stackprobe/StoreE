@@ -36,6 +36,8 @@ namespace Charlotte
 
 		private void Main3()
 		{
+			// テスト系 -- リリース版では使用しない。
+#if DEBUG
 			// -- choose one --
 
 			Main4(new ArgsReader(new string[] { "http://cdimage.ubuntulinux.jp/releases/22.04/ubuntu-ja-22.04-desktop-amd64.iso", "/R", @"C:\temp\ubuntu-ja-22.04-desktop-amd64.iso" }));
@@ -45,7 +47,7 @@ namespace Charlotte
 			//new Test0003().Test01();
 
 			// --
-
+#endif
 			Common.Pause();
 		}
 

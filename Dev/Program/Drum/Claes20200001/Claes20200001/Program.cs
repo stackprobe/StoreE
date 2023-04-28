@@ -34,6 +34,8 @@ namespace Charlotte
 
 		private void Main3()
 		{
+			// テスト系 -- リリース版では使用しない。
+#if DEBUG
 			// -- choose one --
 
 			Main4(new ArgsReader(new string[] { @"C:\temp\input", @"C:\temp\input.drum.gz" }));
@@ -43,7 +45,7 @@ namespace Charlotte
 			//new Test0003().Test01();
 
 			// --
-
+#endif
 			Common.Pause();
 		}
 

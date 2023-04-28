@@ -18,7 +18,7 @@ namespace Charlotte.Tests
 			Test01_a(100, 100);
 			Test01_a(1000, 10);
 
-			Console.WriteLine("OK!");
+			Console.WriteLine("OK! (TEST-0015-01)");
 		}
 
 		public void Test01_a(int testDataScale, int testCount)
@@ -78,7 +78,7 @@ namespace Charlotte.Tests
 			Test02_a(3000, 300);
 			Test02_a(10000, 100);
 
-			Console.WriteLine("OK!");
+			Console.WriteLine("OK! (TEST-0015-02)");
 		}
 
 		public void Test02_a(int testDataScale, int testCount)
@@ -148,7 +148,7 @@ namespace Charlotte.Tests
 			Test03_a(3000, 1000);
 			Test03_a(10000, 300);
 
-			Console.WriteLine("OK!");
+			Console.WriteLine("OK! (TEST-0015-03)");
 		}
 
 		public void Test03_a(int testDataScale, int testCount)
@@ -265,6 +265,8 @@ namespace Charlotte.Tests
 
 			if (ret != "ABCDEFGHIJKLMN")
 				throw null;
+
+			Console.WriteLine("OK! (TEST-0015-04)");
 		}
 	}
 }

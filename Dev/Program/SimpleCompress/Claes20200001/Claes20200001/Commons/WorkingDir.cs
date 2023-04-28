@@ -13,47 +13,67 @@ namespace Charlotte.Commons
 
 		public class RootInfo
 		{
-			private string Dir;
-			private bool Created = false;
-
-			public RootInfo(string dir)
-			{
-				this.Dir = dir;
-			}
+			private string Dir = null;
 
 			public string GetDir()
 			{
-				if (!this.Created)
+				if (this.Dir == null)
 				{
-					SCommon.DeletePath(this.Dir);
-					SCommon.CreateDir(this.Dir);
+					string dir = GetRootDir();
 
-					this.Created = true;
+					SCommon.DeletePath(dir);
+					SCommon.CreateDir(dir);
+
+					this.Dir = dir;
 				}
 				return this.Dir;
 			}
 
 			public void Delete()
 			{
-				if (this.Created)
+				if (this.Dir != null)
 				{
-					SCommon.DeletePath(this.Dir);
+					try
+					{
+						Directory.Delete(this.Dir, true);
+					}
+					catch (Exception e)
+					{
+						ProcMain.WriteLog(e);
+					}
 
-					this.Created = false;
+					this.Dir = null;
 				}
 			}
 		}
 
-		public static RootInfo CreateProcessRoot()
+		private static string GetRootDir()
 		{
-			// 環境変数 TMP のパスは ProcMain.CheckLogonUserAndTmp() で検査している。
+			string dirTMP = GetTMPDir();
+			long timeStamp = SCommon.SimpleDateTime.Now().ToTimeStamp();
+			string uuid = Guid.NewGuid().ToString("B");
 
-			// 環境変数 TMP のフォルダの配下は定期的に削除される。-> プロセス終了時の削除漏れはケアしない。
-
-			return new RootInfo(Path.Combine(Environment.GetEnvironmentVariable("TMP"), ProcMain.APP_IDENT + "_" + Process.GetCurrentProcess().Id));
+			return Path.Combine(dirTMP, "Claes20200001_TMP_" + timeStamp + "_" + uuid);
 		}
 
-		private static long CtorCounter = 0L;
+		private static string GetTMPDir()
+		{
+			foreach (string envName in new string[] { "TMP", "TEMP", "ProgramData" })
+			{
+				string dir = Environment.GetEnvironmentVariable(envName);
+
+				if (
+					!string.IsNullOrEmpty(dir) &&
+					SCommon.IsFairFullPath(dir) &&
+					!dir.Contains('\u0020') && !dir.Contains('\u3000') && // 空白を含まないこと。
+					Directory.Exists(dir)
+					)
+					return dir;
+			}
+			throw new Exception("Environment variables TMP, TEMP, and ProgramData are incorrect");
+		}
+
+		private static ulong CtorCounter = 0;
 
 		private string Dir = null;
 
@@ -64,9 +84,7 @@ namespace Charlotte.Commons
 				if (Root == null)
 					throw new Exception("Root is null");
 
-				//this.Dir = Path.Combine(Root.GetDir(), Guid.NewGuid().ToString("B"));
-				//this.Dir = Path.Combine(Root.GetDir(), SecurityTools.MakePassword_9A());
-				this.Dir = Path.Combine(Root.GetDir(), "$" + CtorCounter++);
+				this.Dir = Path.Combine(Root.GetDir(), (CtorCounter++).ToString("x16"));
 
 				SCommon.CreateDir(this.Dir);
 			}
@@ -78,13 +96,11 @@ namespace Charlotte.Commons
 			return Path.Combine(this.GetDir(), localName);
 		}
 
-		private long PathCounter = 0L;
+		private ulong PathCounter = 0;
 
 		public string MakePath()
 		{
-			//return this.GetPath(Guid.NewGuid().ToString("B"));
-			//return this.GetPath(SecurityTools.MakePassword_9A());
-			return this.GetPath("$" + this.PathCounter++);
+			return this.GetPath((this.PathCounter++).ToString("x16"));
 		}
 
 		public void Dispose()

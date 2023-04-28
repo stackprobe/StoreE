@@ -39,7 +39,7 @@ namespace Charlotte
 #if DEBUG
 			// -- choose one --
 
-			Main4(new ArgsReader(new string[] { "v1s", @"C:\home\GitHub\StoreC" }));
+			Main4(new ArgsReader(new string[] { "v1s", @"C:\home\GitHub\StoreE" }));
 			//new Test0001().Test01();
 			//new Test0002().Test01();
 			//new Test0003().Test01();

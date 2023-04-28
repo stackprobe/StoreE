@@ -11,7 +11,7 @@ namespace Charlotte
 {
 	public static class Compressor
 	{
-		private static Stream S_Writer;
+		private static Stream P_Writer;
 
 		private class DirEntry
 		{
@@ -49,8 +49,8 @@ namespace Charlotte
 
 			public void Write()
 			{
-				S_Writer.WriteByte(CompressorConsts.SIGNATURE_DIR_ENTRY_START);
-				SCommon.WritePartString(S_Writer, this.LocalName);
+				P_Writer.WriteByte(CompressorConsts.SIGNATURE_DIR_ENTRY_START);
+				SCommon.WritePartString(P_Writer, this.LocalName);
 				this.Write_DFs();
 			}
 
@@ -62,7 +62,7 @@ namespace Charlotte
 				foreach (FileEntry file in this.FileList)
 					file.Write();
 
-				S_Writer.WriteByte(CompressorConsts.SIGNATURE_DIR_ENTRY_END);
+				P_Writer.WriteByte(CompressorConsts.SIGNATURE_DIR_ENTRY_END);
 			}
 		}
 
@@ -97,17 +97,17 @@ namespace Charlotte
 
 			public void CalculateHash()
 			{
-				this.Hash = SCommon.Hex.ToString(SCommon.GetSHA512File(this.FullPath));
+				this.Hash = SCommon.Hex.I.ToString(SCommon.GetSHA512File(this.FullPath));
 			}
 
 			public void Write()
 			{
-				S_Writer.WriteByte(CompressorConsts.SIGNATURE_FILE_ENTRY_START);
-				SCommon.WritePartString(S_Writer, this.LocalName);
-				SCommon.WritePartLong(S_Writer, this.CreationTime.ToTimeStamp());
-				SCommon.WritePartLong(S_Writer, this.LastWriteTime.ToTimeStamp());
-				SCommon.WritePartLong(S_Writer, this.LastAccessTime.ToTimeStamp());
-				SCommon.WritePartString(S_Writer, this.Hash);
+				P_Writer.WriteByte(CompressorConsts.SIGNATURE_FILE_ENTRY_START);
+				SCommon.WritePartString(P_Writer, this.LocalName);
+				SCommon.WritePartLong(P_Writer, this.CreationTime.ToTimeStamp());
+				SCommon.WritePartLong(P_Writer, this.LastWriteTime.ToTimeStamp());
+				SCommon.WritePartLong(P_Writer, this.LastAccessTime.ToTimeStamp());
+				SCommon.WritePartString(P_Writer, this.Hash);
 			}
 		}
 
@@ -173,9 +173,9 @@ namespace Charlotte
 			using (FileStream fileWriter = new FileStream(wFile, FileMode.Create, FileAccess.Write))
 			using (GZipStream writer = new GZipStream(fileWriter, CompressionMode.Compress))
 			{
-				S_Writer = writer;
+				P_Writer = writer;
 				root.Write_DFs();
-				S_Writer = null;
+				P_Writer = null;
 
 				foreach (string hash in hash2file.Keys.OrderBy(SCommon.Comp))
 				{

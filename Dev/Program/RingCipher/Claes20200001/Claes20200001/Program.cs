@@ -30,7 +30,7 @@ namespace Charlotte
 			{
 				Main4(ar);
 			}
-			Common.OpenOutputDirIfCreated();
+			SCommon.OpenOutputDirIfCreated();
 		}
 
 		private void Main3()
@@ -46,7 +46,7 @@ namespace Charlotte
 
 			// --
 #endif
-			Common.Pause();
+			SCommon.Pause();
 		}
 
 		private void Main4(ArgsReader ar)
@@ -101,7 +101,7 @@ namespace Charlotte
 				throw new Exception("Bad command line option (not /K or /P)");
 			}
 
-			Console.WriteLine("rawKey: " + SCommon.Hex.ToString(rawKey));
+			Console.WriteLine("rawKey: " + SCommon.Hex.I.ToString(rawKey));
 
 			bool encryptMode;
 
@@ -249,7 +249,7 @@ namespace Charlotte
 				)
 				throw new Exception("Bad raw-key-file text: " + text);
 
-			return SCommon.Hex.ToBytes(text);
+			return SCommon.Hex.I.ToBytes(text);
 		}
 	}
 }

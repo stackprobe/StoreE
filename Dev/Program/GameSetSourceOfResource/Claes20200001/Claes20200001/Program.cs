@@ -38,7 +38,7 @@ namespace Charlotte
 #if DEBUG
 			// -- choose one --
 
-			Main4(new ArgsReader(new string[] { @"C:\Dev\Game\00_Game\Resource", @"C:\Dev\Game\00_Game\doc\Readme.txt", @"C:\temp\Readme.txt" }));
+			Main4(new ArgsReader(new string[] { @"C:\Dev\Dough\00_Game\Resource", @"C:\Dev\Dough\00_Game\doc\Readme.txt", @"C:\temp\Readme.txt" }));
 			//new Test0001().Test01();
 			//new Test0002().Test01();
 			//new Test0003().Test01();

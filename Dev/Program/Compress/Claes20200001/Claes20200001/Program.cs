@@ -30,7 +30,7 @@ namespace Charlotte
 			{
 				Main4(ar);
 			}
-			Common.OpenOutputDirIfCreated();
+			SCommon.OpenOutputDirIfCreated();
 		}
 
 		private void Main3()
@@ -46,7 +46,7 @@ namespace Charlotte
 
 			// --
 #endif
-			//Common.Pause();
+			SCommon.Pause();
 		}
 
 		private void Main4(ArgsReader ar)
@@ -154,7 +154,7 @@ namespace Charlotte
 		{
 			byte[] bStr = Encoding.UTF8.GetBytes(str);
 
-			this.Write(SCommon.ToBytes(bStr.Length));
+			this.Write(SCommon.IntToBytes(bStr.Length));
 			this.Write(bStr);
 		}
 
@@ -203,7 +203,7 @@ namespace Charlotte
 					if (label == "D") // Directory
 					{
 						string relPath = this.ReadString();
-						relPath = Common.ToFairRelPath(relPath, wDir.Length);
+						relPath = SCommon.ToFairRelPath(relPath, wDir.Length);
 						string dir = Path.Combine(wDir, relPath);
 
 						Console.WriteLine("> " + dir);
@@ -213,7 +213,7 @@ namespace Charlotte
 					else if (label == "F") // File
 					{
 						string relPath = this.ReadString();
-						relPath = Common.ToFairRelPath(relPath, wDir.Length);
+						relPath = SCommon.ToFairRelPath(relPath, wDir.Length);
 						string file = Path.Combine(wDir, relPath);
 
 						Console.WriteLine("> " + file);

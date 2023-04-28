@@ -32,7 +32,7 @@ namespace Charlotte
 			{
 				Main4(ar);
 			}
-			//SCommon.OpenOutputDirIfCreated();
+			SCommon.OpenOutputDirIfCreated();
 		}
 
 		private void Main3()

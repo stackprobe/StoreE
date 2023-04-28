@@ -132,7 +132,7 @@ namespace Charlotte
 					if (!Directory.Exists(this.StoreDir))
 						throw new Exception("no StoreDir");
 
-					hs.Perform();
+					hs.Run();
 				}
 
 				ProcMain.WriteLog("RemoteCmdServer-ED");

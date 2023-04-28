@@ -61,7 +61,7 @@ namespace Charlotte
 
 			// --
 #endif
-			//SCommon.Pause();
+			SCommon.Pause();
 		}
 
 		private void Main4(ArgsReader ar)

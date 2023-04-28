@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using Charlotte.Commons;
-using Charlotte.Utilities;
 
 namespace Charlotte.Tests
 {
@@ -12,7 +11,7 @@ namespace Charlotte.Tests
 	{
 		public void Test01()
 		{
-			Console.WriteLine(GitCommandUtils.GetGitProgram());
+			// none
 		}
 	}
 }

@@ -41,27 +41,31 @@ namespace Charlotte.Tests
 
 		public void Test02()
 		{
-			Test02_a(1000000, 300000, 300000);
-			Test02_a(1000000, 100000, 100000);
-			Test02_a(1000000, 30000, 30000);
-			Test02_a(1000000, 10000, 10000);
-			Test02_a(1000000, 3000, 3000);
-			Test02_a(1000000, 1000, 1000);
-			Test02_a(1000000, 300, 300);
-			Test02_a(1000000, 100, 100);
-			Test02_a(1000000, 30, 30);
-			Test02_a(1000000, 10, 10);
+			Test02_a(1000000, 2000000, 300000, 300000);
+			Test02_a(1000000, 2000000, 100000, 100000);
+			Test02_a(1000000, 2000000, 30000, 30000);
+			Test02_a(1000000, 2000000, 10000, 10000);
+			Test02_a(1000000, 2000000, 3000, 3000);
+			Test02_a(1000000, 2000000, 1000, 1000);
+			Test02_a(1000000, 2000000, 300, 300);
+			Test02_a(1000000, 2000000, 100, 100);
+			Test02_a(1000000, 2000000, 30, 30);
+			Test02_a(1000000, 2000000, 10, 10);
 
 			Console.WriteLine("OK!");
 		}
 
-		private void Test02_a(int maxValue, int valueStepScale, int testCount)
+		private void Test02_a(int minValue, int maxValue, int valueStepScale, int testCount)
 		{
 			for (int testcnt = 0; testcnt < testCount; testcnt++)
 			{
 				List<int> list = new List<int>();
 
-				for (int value = 0; value <= maxValue; value += SCommon.CRandom.GetRange(1, valueStepScale))
+				for (
+					int value = SCommon.CRandom.GetRange(minValue, minValue + valueStepScale);
+					value <= maxValue;
+					value += SCommon.CRandom.GetRange(1, valueStepScale)
+					)
 					list.Add(value);
 
 				int expect = SCommon.CRandom.GetInt(list.Count);
@@ -79,32 +83,35 @@ namespace Charlotte.Tests
 
 		public void Test03()
 		{
-			Test03_a(1000000, 300000, 300000);
-			Test03_a(1000000, 100000, 100000);
-			Test03_a(1000000, 30000, 30000);
-			Test03_a(1000000, 10000, 10000);
-			Test03_a(1000000, 3000, 3000);
-			Test03_a(1000000, 1000, 1000);
-			Test03_a(1000000, 300, 300);
-			Test03_a(1000000, 100, 100);
-			Test03_a(1000000, 30, 30);
-			Test03_a(1000000, 10, 10);
+			Test03_a(1000000, 2000000, 300000, 300000);
+			Test03_a(1000000, 2000000, 100000, 100000);
+			Test03_a(1000000, 2000000, 30000, 30000);
+			Test03_a(1000000, 2000000, 10000, 10000);
+			Test03_a(1000000, 2000000, 3000, 3000);
+			Test03_a(1000000, 2000000, 1000, 1000);
+			Test03_a(1000000, 2000000, 300, 300);
+			Test03_a(1000000, 2000000, 100, 100);
+			Test03_a(1000000, 2000000, 30, 30);
+			Test03_a(1000000, 2000000, 10, 10);
 
 			Console.WriteLine("OK!");
 		}
 
-		private void Test03_a(int maxValue, int valueStepScale, int testCount)
+		private void Test03_a(int minValue, int maxValue, int valueStepScale, int testCount)
 		{
 			for (int testcnt = 0; testcnt < testCount; testcnt++)
 			{
-				int target = SCommon.CRandom.GetInt(maxValue);
-				int expect = -1;
-
 				List<int> list = new List<int>();
 
-				for (int value = 0; value <= maxValue; value += SCommon.CRandom.GetRange(1, valueStepScale))
-					if (value != target)
-						list.Add(value);
+				for (
+					int value = SCommon.CRandom.GetRange(minValue, minValue + valueStepScale);
+					value <= maxValue;
+					value += SCommon.CRandom.GetRange(1, valueStepScale)
+					)
+					list.Add(value);
+
+				int target = SCommon.DesertElement(list, SCommon.CRandom.GetInt(list.Count));
+				int expect = -1;
 
 				// ----
 
@@ -114,27 +121,6 @@ namespace Charlotte.Tests
 					throw null;
 			}
 			Console.WriteLine("OK");
-		}
-
-		public void Test04()
-		{
-			Test04_a(1000000, 2000000, 300000, 300000);
-			Test04_a(1000000, 2000000, 100000, 100000);
-			Test04_a(1000000, 2000000, 30000, 30000);
-			Test04_a(1000000, 2000000, 10000, 10000);
-			Test04_a(1000000, 2000000, 3000, 3000);
-			Test04_a(1000000, 2000000, 1000, 1000);
-			Test04_a(1000000, 2000000, 300, 300);
-			Test04_a(1000000, 2000000, 100, 100);
-			Test04_a(1000000, 2000000, 30, 30);
-			Test04_a(1000000, 2000000, 10, 10);
-
-			Console.WriteLine("OK!");
-		}
-
-		private void Test04_a(int p, int p_2, int p_3, int p_4)
-		{
-			// TODO
 		}
 	}
 }

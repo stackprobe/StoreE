@@ -54,7 +54,7 @@ namespace Charlotte
 		{
 			// -- choose one --
 
-			//new Test0001().Test01(); // SCommon.Base32
+			new Test0001().Test01(); // SCommon.Base32
 			//new Test0001().Test02(); // SCommon.Base32
 			//new Test0002().Test01(); // SCommon.Base64
 			//new Test0002().Test02(); // SCommon.Base64
@@ -72,7 +72,7 @@ namespace Charlotte
 			//new Test0009().Test01(); // SCommon.GetRange
 			//new Test0009().Test02(); // SCommon.GetRange
 			//new Test0009().Test03(); // SCommon.GetRange
-			new Test0009().Test04(); // SCommon.GetRange
+			//new Test0009().Test04(); // SCommon.GetRange
 
 			// --
 		}

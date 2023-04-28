@@ -13,7 +13,7 @@ namespace Charlotte.Tests
 		{
 			for (int testcnt = 0; testcnt < 10000; testcnt++)
 			{
-				if (testcnt % 1000 == 0) Console.WriteLine("" + testcnt); // cout
+				if (testcnt % 1000 == 0) Console.WriteLine("TEST-0005-01, " + testcnt); // cout
 
 				byte[] data = SCommon.CRandom.GetBytes(SCommon.CRandom.GetInt(1000));
 				string str = SCommon.Hex.I.ToString(data);

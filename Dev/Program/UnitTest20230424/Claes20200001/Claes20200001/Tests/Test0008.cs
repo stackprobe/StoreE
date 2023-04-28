@@ -31,7 +31,7 @@ namespace Charlotte.Tests
 		{
 			int ret = SCommon.GetIndex(str.ToCharArray(), target, (a, b) => (int)a - (int)b);
 
-			Console.WriteLine(string.Join(", ", str, target, expect, ret)); // cout
+			Console.WriteLine(string.Join(", ", "TEST-0008-01", str, target, expect, ret)); // cout
 
 			if (ret != expect)
 				throw null;
@@ -57,6 +57,8 @@ namespace Charlotte.Tests
 
 		private void Test02_a(int minValue, int maxValue, int valueStepScale, int testCount)
 		{
+			Console.WriteLine(string.Join(", ", "TEST-0008-02", minValue, maxValue, valueStepScale, testCount)); // cout
+
 			for (int testcnt = 0; testcnt < testCount; testcnt++)
 			{
 				List<int> list = new List<int>();
@@ -99,6 +101,8 @@ namespace Charlotte.Tests
 
 		private void Test03_a(int minValue, int maxValue, int valueStepScale, int testCount)
 		{
+			Console.WriteLine(string.Join(", ", "TEST-0008-03", minValue, maxValue, valueStepScale, testCount)); // cout
+
 			for (int testcnt = 0; testcnt < testCount; testcnt++)
 			{
 				List<int> list = new List<int>();

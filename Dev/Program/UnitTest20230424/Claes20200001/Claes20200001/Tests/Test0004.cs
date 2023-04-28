@@ -15,7 +15,7 @@ namespace Charlotte.Tests
 
 			for (int testcnt = 0; testcnt < 1000; testcnt++)
 			{
-				if (testcnt % 100 == 0) Console.WriteLine("" + testcnt); // cout
+				if (testcnt % 100 == 0) Console.WriteLine("TEST-0004-01, " + testcnt); // cout
 
 				string[] lines = Enumerable.Range(0, SCommon.CRandom.GetInt(100))
 					.Select(dummy1 => new string(Enumerable.Range(0, SCommon.CRandom.GetInt(100)).Select(dummy2 => SCommon.CRandom.ChooseOne(TEST_CHARS)).ToArray()))

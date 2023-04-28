@@ -12,7 +12,7 @@ namespace Charlotte.Tests
 		{
 			for (int testcnt = 0; testcnt < 1000; testcnt++)
 			{
-				if (testcnt % 100 == 0) Console.WriteLine("" + testcnt); // cout
+				if (testcnt % 100 == 0) Console.WriteLine("TEST-0003-01, " + testcnt); // cout
 
 				bool[] table = Enumerable.Range(0, SCommon.CRandom.GetRange(1, 300)).Select(dummy => SCommon.CRandom.GetBoolean()).ToArray();
 
@@ -77,11 +77,11 @@ namespace Charlotte.Tests
 
 		public void Test02()
 		{
-			for (int testcnt = 0; testcnt < 1000; testcnt++)
+			for (int testcnt = 0; testcnt < 10000; testcnt++)
 			{
-				//if (testcnt % 100 == 0) Console.WriteLine("" + testcnt); // cout
+				if (testcnt % 1000 == 0) Console.WriteLine("TEST-0003-02, " + testcnt); // cout
 
-				uint[] table = Enumerable.Range(0, SCommon.CRandom.GetRange(1, 300)).Select(dummy => SCommon.CRandom.GetUInt()).ToArray();
+				uint[] table = Enumerable.Range(0, SCommon.CRandom.GetRange(1, 1000)).Select(dummy => SCommon.CRandom.GetUInt()).ToArray();
 
 				RandomUnit ru = new RandomUnit(new RandomNumberGenerator_02() { Table = table });
 
@@ -117,11 +117,11 @@ namespace Charlotte.Tests
 
 		public void Test03()
 		{
-			for (int testcnt = 0; testcnt < 1000; testcnt++)
+			for (int testcnt = 0; testcnt < 10000; testcnt++)
 			{
-				//if (testcnt % 100 == 0) Console.WriteLine("" + testcnt); // cout
+				if (testcnt % 1000 == 0) Console.WriteLine("TEST-0003-03, " + testcnt); // cout
 
-				ulong[] table = Enumerable.Range(0, SCommon.CRandom.GetRange(1, 300)).Select(dummy => SCommon.CRandom.GetULong()).ToArray();
+				ulong[] table = Enumerable.Range(0, SCommon.CRandom.GetRange(1, 1000)).Select(dummy => SCommon.CRandom.GetULong()).ToArray();
 
 				RandomUnit ru = new RandomUnit(new RandomNumberGenerator_03() { Table = table });
 

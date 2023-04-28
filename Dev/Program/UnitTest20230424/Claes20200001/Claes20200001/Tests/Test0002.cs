@@ -14,7 +14,7 @@ namespace Charlotte.Tests
 		{
 			for (int testcnt = 0; testcnt < 10000; testcnt++)
 			{
-				if (testcnt % 1000 == 0) Console.WriteLine("" + testcnt); // cout
+				if (testcnt % 1000 == 0) Console.WriteLine("TEST-0002-01, " + testcnt); // cout
 
 				byte[] data = SCommon.CRandom.GetBytes(SCommon.CRandom.GetInt(1000));
 				string str = SCommon.Base64.I.Encode(data);
@@ -49,6 +49,8 @@ namespace Charlotte.Tests
 
 		private void Test02_a(string testChars)
 		{
+			Console.WriteLine(string.Join(", ", "TEST-0002-02", testChars)); // cout
+
 			char[] TEST_CHARS = testChars.ToArray();
 
 			for (int testcnt = 0; testcnt < 10000; testcnt++)

@@ -56,7 +56,7 @@ namespace Charlotte.WebServices
 			}
 		}
 
-		public void Perform()
+		public void Run()
 		{
 			SockCommon.WriteLog(SockCommon.ErrorLevel_e.INFO, "サーバーを開始しています...");
 
@@ -151,7 +151,7 @@ namespace Charlotte.WebServices
 							}
 						}
 
-						SockCommon.Shuffle_7(this.Channels); // 順序による何らかの偏りを懸念...
+						SockCommon.ShuffleP4(this.Channels); // 順序による何らかの偏りを懸念...
 
 						GC.Collect();
 

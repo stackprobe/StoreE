@@ -104,8 +104,8 @@ namespace Charlotte
 			SCommon.Batch(
 				new string[]
 				{
-					GitCommandUtils.GetGitProgram() + " add *",
-					GitCommandUtils.GetGitProgram() + " commit -m \"" + commitComment + "\"",
+					GitCommand.GetGitProgram() + " add *",
+					GitCommand.GetGitProgram() + " commit -m \"" + commitComment + "\"",
 				},
 				dir
 				);
@@ -123,7 +123,7 @@ namespace Charlotte
 
 		private double GetVoyager1SunDistance()
 		{
-			return new VoyagerStatus(VOYAGER_DATA_FILE).V1S_Kilometer;
+			return new VoyagerSunStatusFile(VOYAGER_DATA_FILE).V1S_Kilometer;
 		}
 	}
 }

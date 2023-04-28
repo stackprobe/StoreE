@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Charlotte.Commons;
+using Charlotte.Utilities;
 
-namespace Charlotte.Utilities
+namespace Charlotte
 {
-	public class VoyagerVelocity
+	public class VoyagerStatus
 	{
 		private const string NASA_DISTANCE_DATA_URL = "https://voyager.jpl.nasa.gov/assets/javascripts/distance_data.js";
 
@@ -50,7 +51,7 @@ namespace Charlotte.Utilities
 		public DistancePairInfo DistanceVoyager1Sun = new DistancePairInfo();
 		public DistancePairInfo DistanceVoyager2Sun = new DistancePairInfo();
 
-		public VoyagerVelocity()
+		public VoyagerStatus()
 		{
 			HTTPClient hc = new HTTPClient(NASA_DISTANCE_DATA_URL);
 

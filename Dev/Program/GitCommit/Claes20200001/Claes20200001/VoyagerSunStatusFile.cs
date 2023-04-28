@@ -6,9 +6,9 @@ using System.Threading;
 using System.IO;
 using Charlotte.Commons;
 
-namespace Charlotte.Utilities
+namespace Charlotte
 {
-	public class VoyagerStatus
+	public class VoyagerSunStatusFile
 	{
 		public long TimeStamp;
 		public double V1S_Kilometer;
@@ -16,14 +16,14 @@ namespace Charlotte.Utilities
 		public double V1S_KilometerPerSecond;
 		public double V2S_KilometerPerSecond;
 
-		public VoyagerStatus(string saveDataFile)
+		public VoyagerSunStatusFile(string saveDataFile)
 		{
 			if (string.IsNullOrEmpty(saveDataFile))
 				throw new Exception("Bad saveDataFile");
 
 			LoadFile(saveDataFile);
 
-			VoyagerVelocity vv = null;
+			VoyagerStatus vv = null;
 			DateTime now = DateTime.Now;
 			long timeDiff = SCommon.TimeStampToSec.ToSec(now) - SCommon.TimeStampToSec.ToSec(TimeStamp);
 
@@ -35,7 +35,7 @@ namespace Charlotte.Utilities
 			{
 				try
 				{
-					vv = new VoyagerVelocity();
+					vv = new VoyagerStatus();
 				}
 				catch (Exception ex)
 				{

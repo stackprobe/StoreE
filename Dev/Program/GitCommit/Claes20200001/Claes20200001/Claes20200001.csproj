@@ -58,10 +58,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Test0001.cs" />
-    <Compile Include="Utilities\GitCommandUtils.cs" />
+    <Compile Include="GitCommand.cs" />
     <Compile Include="Utilities\HTTPClient.cs" />
-    <Compile Include="Utilities\VoyagerStatus.cs" />
-    <Compile Include="Utilities\VoyagerVelocity.cs" />
+    <Compile Include="VoyagerSunStatusFile.cs" />
+    <Compile Include="VoyagerStatus.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,9 +6,9 @@ using System.Text.RegularExpressions;
 using System.IO;
 using Charlotte.Commons;
 
-namespace Charlotte.Utilities
+namespace Charlotte
 {
-	public static class GitCommandUtils
+	public static class GitCommand
 	{
 		private static string _gitProgram = null;
 

@@ -32,7 +32,7 @@ namespace Charlotte.Tests
 		{
 			int[] range = SCommon.GetRange(str.ToCharArray(), target, (a, b) => (int)a - (int)b);
 
-			//Console.WriteLine(string.Join(", ", range[0], range[1], expectRange_L, expectRange_R)); // cout
+			Console.WriteLine(string.Join(", ", str, target, expectRange_L, expectRange_R, range[0], range[1])); // cout
 
 			if (
 				range[0] != expectRange_L ||
@@ -40,7 +40,7 @@ namespace Charlotte.Tests
 				)
 				throw null;
 
-			//Console.WriteLine("OK");
+			Console.WriteLine("OK");
 		}
 	}
 }

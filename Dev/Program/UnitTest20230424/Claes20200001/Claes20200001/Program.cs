@@ -67,7 +67,10 @@ namespace Charlotte
 			//new Test0006().Test02(); // SCommon.TimeStampToSec
 			//new Test0007().Test01(); // WorkingDir
 			//new Test0008().Test01(); // SCommon.GetIndex
-			new Test0009().Test01(); // SCommon.GetRange
+			//new Test0008().Test02(); // SCommon.GetIndex
+			//new Test0008().Test03(); // SCommon.GetIndex
+			new Test0008().Test04(); // SCommon.GetIndex
+			//new Test0009().Test01(); // SCommon.GetRange
 
 			// --
 		}

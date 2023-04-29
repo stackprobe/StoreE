@@ -142,6 +142,12 @@ T C:\home\GitHub\StoreE\DevOld\RemoteCmdServer\TestData
 > C:\home\GitHub\StoreE\DevOld\RingCipher\doc
 < C:\DevBin\20230429_Program\RingCipher\out
 T C:\home\GitHub\StoreE\DevOld\RingCipher\out
+< C:\DevBin\20230431_RunSub\Claes20200001
+> C:\home\GitHub\StoreE\DevOld\RunSub\Claes20200001
+< C:\DevBin\20230431_RunSub\doc
+> C:\home\GitHub\StoreE\DevOld\RunSub\doc
+< C:\DevBin\20230431_RunSub\out
+T C:\home\GitHub\StoreE\DevOld\RunSub\out
 < C:\DevBin\20230429_Program\SimpleCompress\Claes20200001
 > C:\home\GitHub\StoreE\DevOld\SimpleCompress\Claes20200001
 < C:\DevBin\20230429_Program\SimpleCompress\doc

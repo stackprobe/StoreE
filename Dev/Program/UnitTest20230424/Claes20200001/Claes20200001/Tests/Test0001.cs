@@ -64,5 +64,88 @@ namespace Charlotte.Tests
 			}
 			Console.WriteLine("OK");
 		}
+
+		public void Test03()
+		{
+			for (int testcnt = 0; testcnt < 1000; testcnt++)
+			{
+				byte[] data = SCommon.CRandom.GetBytes(SCommon.CRandom.GetInt(30));
+
+				// ----
+				// そのまま
+
+				string str = SCommon.Base32.I.Encode(data);
+				byte[] retData = SCommon.Base32.I.Decode(str);
+
+				Console.WriteLine(str + " --> " + SCommon.Hex.I.ToString(retData));
+
+				if (SCommon.Comp(data, retData) != 0) // ? 不一致
+					throw null;
+
+				// ----
+				// 小文字
+
+				str = SCommon.Base32.I.Encode(data);
+				str = str.ToLower();
+				retData = SCommon.Base32.I.Decode(str);
+
+				Console.WriteLine(str + " --> " + SCommon.Hex.I.ToString(retData));
+
+				if (SCommon.Comp(data, retData) != 0) // ? 不一致
+					throw null;
+
+				// ----
+				// 大文字小文字混在
+
+				str = SCommon.Base32.I.Encode(data);
+				str = new string(str.Select(chr => SCommon.CRandom.GetBoolean() ? char.ToLower(chr) : char.ToUpper(chr)).ToArray());
+				retData = SCommon.Base32.I.Decode(str);
+
+				Console.WriteLine(str + " --> " + SCommon.Hex.I.ToString(retData));
+
+				if (SCommon.Comp(data, retData) != 0) // ? 不一致
+					throw null;
+
+				// ----
+				// パディング無し
+
+				str = SCommon.Base32.I.EncodeNoPadding(data);
+				retData = SCommon.Base32.I.Decode(str);
+
+				Console.WriteLine(str + " --> " + SCommon.Hex.I.ToString(retData));
+
+				if (SCommon.Comp(data, retData) != 0) // ? 不一致
+					throw null;
+
+				// ----
+				// パディング無し + 小文字
+
+				str = SCommon.Base32.I.EncodeNoPadding(data);
+				str = str.ToLower();
+				retData = SCommon.Base32.I.Decode(str);
+
+				Console.WriteLine(str + " --> " + SCommon.Hex.I.ToString(retData));
+
+				if (SCommon.Comp(data, retData) != 0) // ? 不一致
+					throw null;
+
+				// ----
+				// パディング無し + 大文字小文字混在
+
+				str = SCommon.Base32.I.EncodeNoPadding(data);
+				str = new string(str.Select(chr => SCommon.CRandom.GetBoolean() ? char.ToLower(chr) : char.ToUpper(chr)).ToArray());
+				retData = SCommon.Base32.I.Decode(str);
+
+				Console.WriteLine(str + " --> " + SCommon.Hex.I.ToString(retData));
+
+				if (SCommon.Comp(data, retData) != 0) // ? 不一致
+					throw null;
+
+				// ----
+
+				Console.WriteLine("OK");
+			}
+			Console.WriteLine("OK! (TEST-0001-03)");
+		}
 	}
 }

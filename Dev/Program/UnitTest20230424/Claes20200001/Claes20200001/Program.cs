@@ -56,13 +56,16 @@ namespace Charlotte
 
 			//new Test0001().Test01(); // SCommon.Base32
 			//new Test0001().Test02(); // SCommon.Base32
+			new Test0001().Test03(); // SCommon.Base32
 			//new Test0002().Test01(); // SCommon.Base64
 			//new Test0002().Test02(); // SCommon.Base64
+			//new Test0002().Test03(); // SCommon.Base64
 			//new Test0003().Test01(); // RandomUnit
 			//new Test0003().Test02(); // RandomUnit
 			//new Test0003().Test03(); // RandomUnit
 			//new Test0004().Test01(); // SCommon.Serializer
 			//new Test0005().Test01(); // SCommon.Hex
+			//new Test0005().Test02(); // SCommon.Hex
 			//new Test0006().Test01(); // SCommon.TimeStampToSec
 			//new Test0006().Test02(); // SCommon.TimeStampToSec
 			//new Test0007().Test01(); // WorkingDir
@@ -72,7 +75,7 @@ namespace Charlotte
 			//new Test0009().Test01(); // SCommon.GetRange
 			//new Test0009().Test02(); // SCommon.GetRange
 			//new Test0009().Test03(); // SCommon.GetRange
-			new Test0009().Test04(); // SCommon.GetRange
+			//new Test0009().Test04(); // SCommon.GetRange
 
 			// --
 		}

@@ -64,5 +64,40 @@ namespace Charlotte.Tests
 			}
 			Console.WriteLine("OK");
 		}
+
+		public void Test03()
+		{
+			for (int testcnt = 0; testcnt < 1000; testcnt++)
+			{
+				byte[] data = SCommon.CRandom.GetBytes(SCommon.CRandom.GetInt(30));
+
+				// ----
+				// そのまま
+
+				string str = SCommon.Base64.I.Encode(data);
+				byte[] retData = SCommon.Base64.I.Decode(str);
+
+				Console.WriteLine(str + " --> " + SCommon.Hex.I.ToString(retData));
+
+				if (SCommon.Comp(data, retData) != 0) // ? 不一致
+					throw null;
+
+				// ----
+				// パディング無し
+
+				str = SCommon.Base64.I.EncodeNoPadding(data);
+				retData = SCommon.Base64.I.Decode(str);
+
+				Console.WriteLine(str + " --> " + SCommon.Hex.I.ToString(retData));
+
+				if (SCommon.Comp(data, retData) != 0) // ? 不一致
+					throw null;
+
+				// ----
+
+				Console.WriteLine("OK");
+			}
+			Console.WriteLine("OK! (TEST-0002-03)");
+		}
 	}
 }

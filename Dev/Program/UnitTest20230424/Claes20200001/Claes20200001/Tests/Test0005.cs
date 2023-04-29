@@ -37,5 +37,27 @@ namespace Charlotte.Tests
 			}
 			Console.WriteLine("OK!");
 		}
+
+		public void Test02()
+		{
+			Console.WriteLine("TEST-0005-02");
+
+			Test02_a("0123456789ABCDEF", new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef });
+			Test02_a("0123456789AbCdEf", new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef });
+			Test02_a("0123456789aBcDeF", new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef });
+			Test02_a("0123456789abcdef", new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef });
+
+			Console.WriteLine("OK!");
+		}
+
+		private void Test02_a(string str, byte[] expectBytes)
+		{
+			byte[] bytes = SCommon.Hex.I.ToBytes(str);
+
+			if (SCommon.Comp(bytes, expectBytes) != 0) // ? 不一致
+				throw null;
+
+			Console.WriteLine("OK");
+		}
 	}
 }

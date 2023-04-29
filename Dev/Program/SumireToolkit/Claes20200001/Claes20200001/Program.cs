@@ -39,8 +39,8 @@ namespace Charlotte
 
 			//Main4(new ArgsReader(new string[] { "DP", @"C:\temp", ".txt" }));
 			//Main4(new ArgsReader(new string[] { "OS", @"C:\temp" }));
-			//Main4(new ArgsReader(new string[] { "L3", @"C:\temp", @"C:\temp\MP3List.txt" }));
-			Main4(new ArgsReader(new string[] { "RN", @"C:\temp" }));
+			Main4(new ArgsReader(new string[] { "L3", @"C:\temp", @"C:\temp\MP3List.txt" }));
+			//Main4(new ArgsReader(new string[] { "RN", @"C:\temp" }));
 			//new Test0001().Test01();
 			//new Test0002().Test01();
 			//new Test0003().Test01();
@@ -168,8 +168,16 @@ namespace Charlotte
 					.OrderBy(SCommon.CompIgnoreCase)
 					.ToArray();
 
+				const string MID_FILE_NAME_PREFIX = "$$$$_";
+
+				if (fileNames.Any(fileName => SCommon.StartsWithIgnoreCase(fileName, MID_FILE_NAME_PREFIX)))
+					throw new Exception("Bad fileName exist");
+
+				if (Directory.GetDirectories(dir).Any(subDir => SCommon.StartsWithIgnoreCase(Path.GetFileName(subDir), MID_FILE_NAME_PREFIX)))
+					throw new Exception("Bad subDirName exist");
+
 				string[] midFileNames = fileNames
-					.Select(fileName => "$_" + fileName)
+					.Select(fileName => MID_FILE_NAME_PREFIX + fileName)
 					.ToArray();
 
 				string[] destFileNames = new string[fileNames.Length];

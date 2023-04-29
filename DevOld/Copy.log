@@ -10,6 +10,12 @@ T C:\home\GitHub\StoreE\DevOld\Backup\out
 > C:\home\GitHub\StoreE\DevOld\CatalogCopy\doc
 < C:\DevBin\20230429_Program\CatalogCopy\out
 T C:\home\GitHub\StoreE\DevOld\CatalogCopy\out
+< C:\DevBin\20230430_CollectPhotos\Claes20200001
+> C:\home\GitHub\StoreE\DevOld\CollectPhotos\Claes20200001
+< C:\DevBin\20230430_CollectPhotos\doc
+> C:\home\GitHub\StoreE\DevOld\CollectPhotos\doc
+< C:\DevBin\20230430_CollectPhotos\out
+T C:\home\GitHub\StoreE\DevOld\CollectPhotos\out
 < C:\DevBin\20230429_Program\Compress\Claes20200001
 > C:\home\GitHub\StoreE\DevOld\Compress\Claes20200001
 < C:\DevBin\20230429_Program\Compress\doc

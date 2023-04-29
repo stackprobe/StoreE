@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Charlotte.Commons;
 
-namespace Charlotte.Commons
+namespace Charlotte.Drawings
 {
 	/// <summary>
 	/// アルファ値の無い色または色の比率を表す。

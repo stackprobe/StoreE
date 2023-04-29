@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace Charlotte.Commons
+namespace Charlotte.Drawings
 {
 	/// <summary>
 	/// アルファ値の無い色を表す。
@@ -21,6 +21,13 @@ namespace Charlotte.Commons
 			this.R = r;
 			this.G = g;
 			this.B = b;
+		}
+
+		public I3Color(Color color)
+		{
+			this.R = color.R;
+			this.G = color.G;
+			this.B = color.B;
 		}
 
 		public override string ToString()

@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Charlotte.Commons;
 
-namespace Charlotte.Commons
+namespace Charlotte.Drawings
 {
+	/// <summary>
+	/// 矩形領域
+	/// LT : 左上座標
+	/// XY : 中心座標
+	/// RB : 右下座標
+	/// W : 幅
+	/// H : 高さ
+	/// </summary>
 	public struct D4Rect
 	{
 		public double L;
@@ -50,6 +59,22 @@ namespace Charlotte.Commons
 			}
 		}
 
+		public double X
+		{
+			get
+			{
+				return this.L + this.W / 2.0;
+			}
+		}
+
+		public double Y
+		{
+			get
+			{
+				return this.T + this.H / 2.0;
+			}
+		}
+
 		public D2Point LT
 		{
 			get
@@ -79,6 +104,14 @@ namespace Charlotte.Commons
 			get
 			{
 				return new D2Point(this.L, this.B);
+			}
+		}
+
+		public D2Point XY
+		{
+			get
+			{
+				return new D2Point(this.L + this.W / 2.0, this.T + this.H / 2.0);
 			}
 		}
 

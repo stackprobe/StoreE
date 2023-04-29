@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Charlotte.Commons;
 
-namespace Charlotte.Commons
+namespace Charlotte.Drawings
 {
 	public struct D2Size
 	{

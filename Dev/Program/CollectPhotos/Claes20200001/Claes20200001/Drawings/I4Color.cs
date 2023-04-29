@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace Charlotte.Commons
+namespace Charlotte.Drawings
 {
 	/// <summary>
 	/// アルファ値を含む色を表す。
@@ -23,6 +23,14 @@ namespace Charlotte.Commons
 			this.G = g;
 			this.B = b;
 			this.A = a;
+		}
+
+		public I4Color(Color color)
+		{
+			this.R = color.R;
+			this.G = color.G;
+			this.B = color.B;
+			this.A = color.A;
 		}
 
 		public override string ToString()

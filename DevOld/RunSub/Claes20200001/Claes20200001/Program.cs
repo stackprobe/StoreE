@@ -101,9 +101,9 @@ namespace Charlotte
 			ProcMain.WriteLog("* " + command);
 
 			SCommon.Batch(
-				new string[] { command, "TIMEOUT 1" },
-				Path.GetDirectoryName(workingDir),
-				SCommon.StartProcessWindowStyle_e.MINIMIZED
+				new string[] { command, "TIMEOUT 2" },
+				workingDir,
+				SCommon.StartProcessWindowStyle_e.NORMAL
 				);
 
 			ProcMain.WriteLog("done");

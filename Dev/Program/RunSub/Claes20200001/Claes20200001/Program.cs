@@ -38,7 +38,7 @@ namespace Charlotte
 #if DEBUG
 			// -- choose one --
 
-			Main4(new ArgsReader(new string[] { @"C:\temp", "Test" }));
+			Main4(new ArgsReader(new string[] { @"C:\temp" }));
 			//new Test0001().Test01();
 			//new Test0002().Test01();
 			//new Test0003().Test01();
@@ -68,29 +68,28 @@ namespace Charlotte
 		private void Main5(ArgsReader ar)
 		{
 			string rootDir = SCommon.MakeFullPath(ar.NextArg());
-			string targetName = ar.NextArg();
 
 			if (!Directory.Exists(rootDir))
 				throw new Exception("no rootDir");
 
-			if (!SCommon.IsFairLocalPath(targetName, -1) || targetName.Contains('\u0020') || targetName.Contains('\u3000'))
-				throw new Exception("Bad targetName");
+			ProcMain.WriteLog("# " + rootDir);
 
-			ProcMain.WriteLog("R " + rootDir);
-			ProcMain.WriteLog("T " + targetName);
-
-			string targetBatName = targetName + ".bat";
-			string targetExeName = targetName + ".exe";
-
-			foreach (string file in Directory.GetFiles(rootDir, "*", SearchOption.AllDirectories))
+			foreach (string file in Directory.GetFiles(rootDir, "*", SearchOption.AllDirectories).OrderBy(SCommon.Comp))
 			{
-				if (SCommon.EqualsIgnoreCase(Path.GetFileName(file), targetBatName))
+				string localName = Path.GetFileName(file);
+
+				if (!localName.Contains('\u0020') && !localName.Contains('\u3000')) // ? 空白を含まない。
 				{
-					ExecuteCommand("CALL " + targetBatName, Path.GetDirectoryName(file));
-				}
-				else if (SCommon.EqualsIgnoreCase(Path.GetFileName(file), targetExeName))
-				{
-					ExecuteCommand(targetExeName, Path.GetDirectoryName(file));
+					string ext = Path.GetExtension(file);
+
+					if (SCommon.EqualsIgnoreCase(ext, ".bat"))
+					{
+						ExecuteCommand("CALL " + localName, Path.GetDirectoryName(file));
+					}
+					else if (SCommon.EqualsIgnoreCase(ext, ".exe"))
+					{
+						ExecuteCommand(localName, Path.GetDirectoryName(file));
+					}
 				}
 			}
 			ProcMain.WriteLog("done!");

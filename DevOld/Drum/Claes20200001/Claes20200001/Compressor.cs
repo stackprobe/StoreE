@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.IO.Compression;
-using System.Security.Cryptography;
 using Charlotte.Commons;
 
 namespace Charlotte
@@ -36,7 +35,7 @@ namespace Charlotte
 				ProcMain.WriteLog("d-done");
 			}
 
-			public static List<FileEntry> S_CollectedFiles;
+			public static List<FileEntry> P_CollectedFiles;
 
 			public void CollectFiles()
 			{
@@ -44,7 +43,7 @@ namespace Charlotte
 					dir.CollectFiles();
 
 				foreach (FileEntry file in this.FileList)
-					S_CollectedFiles.Add(file);
+					P_CollectedFiles.Add(file);
 			}
 
 			public void Write()
@@ -131,10 +130,10 @@ namespace Charlotte
 
 			DirEntry root = new DirEntry(rDir, null);
 
-			DirEntry.S_CollectedFiles = new List<FileEntry>();
+			DirEntry.P_CollectedFiles = new List<FileEntry>();
 			root.CollectFiles();
-			List<FileEntry> files = DirEntry.S_CollectedFiles;
-			DirEntry.S_CollectedFiles = null;
+			List<FileEntry> files = DirEntry.P_CollectedFiles;
+			DirEntry.P_CollectedFiles = null;
 
 			for (int index = 0; index < files.Count; index++)
 			{

@@ -10,7 +10,7 @@ namespace Charlotte
 {
 	public static class Decompressor
 	{
-		private static Stream S_Reader;
+		private static Stream P_Reader;
 
 		private class DirEntry
 		{
@@ -20,7 +20,7 @@ namespace Charlotte
 
 			public void Read()
 			{
-				this.LocalName = SCommon.ReadPartString(S_Reader);
+				this.LocalName = SCommon.ReadPartString(P_Reader);
 				this.Read_DFs();
 			}
 
@@ -28,7 +28,7 @@ namespace Charlotte
 			{
 				for (; ; )
 				{
-					int chr = S_Reader.ReadByte();
+					int chr = P_Reader.ReadByte();
 
 					if (chr == CompressorConsts.SIGNATURE_DIR_ENTRY_START)
 					{
@@ -72,7 +72,7 @@ namespace Charlotte
 					file.FullPath = Path.Combine(wDir, file.LocalName);
 			}
 
-			public static List<FileEntry> S_CollectedFiles;
+			public static List<FileEntry> P_CollectedFiles;
 
 			public void CollectFiles()
 			{
@@ -80,7 +80,7 @@ namespace Charlotte
 					dir.CollectFiles();
 
 				foreach (FileEntry file in this.FileList)
-					S_CollectedFiles.Add(file);
+					P_CollectedFiles.Add(file);
 			}
 		}
 
@@ -94,11 +94,11 @@ namespace Charlotte
 
 			public void Read()
 			{
-				this.LocalName = SCommon.ReadPartString(S_Reader);
-				this.CreationTime = SCommon.SimpleDateTime.FromTimeStamp(SCommon.ReadPartLong(S_Reader));
-				this.LastWriteTime = SCommon.SimpleDateTime.FromTimeStamp(SCommon.ReadPartLong(S_Reader));
-				this.LastAccessTime = SCommon.SimpleDateTime.FromTimeStamp(SCommon.ReadPartLong(S_Reader));
-				this.Hash = SCommon.ReadPartString(S_Reader);
+				this.LocalName = SCommon.ReadPartString(P_Reader);
+				this.CreationTime = SCommon.SimpleDateTime.FromTimeStamp(SCommon.ReadPartLong(P_Reader));
+				this.LastWriteTime = SCommon.SimpleDateTime.FromTimeStamp(SCommon.ReadPartLong(P_Reader));
+				this.LastAccessTime = SCommon.SimpleDateTime.FromTimeStamp(SCommon.ReadPartLong(P_Reader));
+				this.Hash = SCommon.ReadPartString(P_Reader);
 			}
 
 			public string FullPath;
@@ -130,18 +130,18 @@ namespace Charlotte
 					LocalName = null,
 				};
 
-				S_Reader = reader;
+				P_Reader = reader;
 				root.Read_DFs();
-				S_Reader = null;
+				P_Reader = null;
 
 				ProcMain.WriteLog("Phase-2");
 
 				root.SetFullPath_All(wDir);
 
-				DirEntry.S_CollectedFiles = new List<FileEntry>();
+				DirEntry.P_CollectedFiles = new List<FileEntry>();
 				root.CollectFiles();
-				List<FileEntry> files = DirEntry.S_CollectedFiles;
-				DirEntry.S_CollectedFiles = null;
+				List<FileEntry> files = DirEntry.P_CollectedFiles;
+				DirEntry.P_CollectedFiles = null;
 
 				Dictionary<string, List<FileEntry>> hash2fileList = SCommon.CreateDictionary<List<FileEntry>>();
 

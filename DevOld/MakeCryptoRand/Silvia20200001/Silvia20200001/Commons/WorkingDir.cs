@@ -49,12 +49,28 @@ namespace Charlotte.Commons
 
 		private static string GetRootDir()
 		{
-			string envTMP = Environment.GetEnvironmentVariable("TMP");
+			string dirTMP = GetTMPDir();
+			long timeStamp = SCommon.SimpleDateTime.Now().ToTimeStamp();
+			string uuid = Guid.NewGuid().ToString("B");
 
-			if (string.IsNullOrEmpty(envTMP))
-				throw new Exception("Environment variable TMP is not defined");
+			return Path.Combine(dirTMP, "Claes20200001_TMP_" + timeStamp + "_" + uuid);
+		}
 
-			return Path.Combine(envTMP, "Claes20200001_TMP_{683426cc-d32b-485d-ad69-c4f210938f72}_" + Process.GetCurrentProcess().Id);
+		private static string GetTMPDir()
+		{
+			foreach (string envName in new string[] { "TMP", "TEMP", "ProgramData" })
+			{
+				string dir = Environment.GetEnvironmentVariable(envName);
+
+				if (
+					!string.IsNullOrEmpty(dir) &&
+					SCommon.IsFairFullPath(dir) &&
+					!dir.Contains('\u0020') && !dir.Contains('\u3000') && // 空白を含まないこと。
+					Directory.Exists(dir)
+					)
+					return dir;
+			}
+			throw new Exception("Environment variables TMP, TEMP, and ProgramData are incorrect");
 		}
 
 		private static ulong CtorCounter = 0;

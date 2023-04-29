@@ -154,6 +154,12 @@ T C:\home\GitHub\StoreE\DevOld\RunSub\out
 > C:\home\GitHub\StoreE\DevOld\SimpleCompress\doc
 < C:\DevBin\20230429_Program\SimpleCompress\out
 T C:\home\GitHub\StoreE\DevOld\SimpleCompress\out
+< C:\DevBin\20230432_SumireToolkit\Claes20200001
+> C:\home\GitHub\StoreE\DevOld\SumireToolkit\Claes20200001
+< C:\DevBin\20230432_SumireToolkit\doc
+> C:\home\GitHub\StoreE\DevOld\SumireToolkit\doc
+< C:\DevBin\20230432_SumireToolkit\out
+T C:\home\GitHub\StoreE\DevOld\SumireToolkit\out
 < C:\DevBin\20230429_Program\Wait\Petra20200001
 > C:\home\GitHub\StoreE\DevOld\Wait\Petra20200001
 < C:\DevBin\20230429_Program\Wait\doc

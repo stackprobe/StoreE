@@ -1,6 +1,7 @@
 CALL C:\Factory\SetEnv.bat
 CALL Clean.bat
 cx **
+IF ERRORLEVEL 1 START *[BUILD-ERROR]
 
 C:\apps\MakeResourceCluster\MakeResourceCluster.exe Resource out\Resource.dat
 

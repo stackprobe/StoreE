@@ -39,8 +39,8 @@ namespace Charlotte
 
 			//Main4(new ArgsReader(new string[] { "DP", @"C:\temp", ".txt" }));
 			//Main4(new ArgsReader(new string[] { "OS", @"C:\temp" }));
-			Main4(new ArgsReader(new string[] { "L3", @"C:\temp", @"C:\temp\MP3List.txt" }));
-			//Main4(new ArgsReader(new string[] { "RN", @"C:\temp" }));
+			//Main4(new ArgsReader(new string[] { "L3", @"C:\temp", @"C:\temp\MP3List.txt" }));
+			Main4(new ArgsReader(new string[] { "RN", @"C:\temp" }));
 			//new Test0001().Test01();
 			//new Test0002().Test01();
 			//new Test0003().Test01();
@@ -192,6 +192,7 @@ namespace Charlotte
 					destFileNames[index] = ((index + 1) * 10).ToString("D4") + "_" + fileName;
 				}
 
+				RenameTestAllFile(dir, fileNames, midFileNames);
 				RenameAllFile(dir, fileNames, midFileNames);
 				RenameAllFile(dir, midFileNames, destFileNames);
 
@@ -200,6 +201,15 @@ namespace Charlotte
 			else
 			{
 				throw new Exception("Bad command");
+			}
+		}
+
+		private void RenameTestAllFile(string dir, string[] fileNames, string[] destFileNames)
+		{
+			for (int index = 0; index < fileNames.Length; index++)
+			{
+				RenameFile(dir, fileNames[index], destFileNames[index]);
+				RenameFile(dir, destFileNames[index], fileNames[index]);
 			}
 		}
 

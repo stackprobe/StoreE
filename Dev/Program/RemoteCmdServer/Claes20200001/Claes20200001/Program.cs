@@ -40,8 +40,8 @@ namespace Charlotte
 #if DEBUG
 			// -- choose one --
 
-			Main4(new ArgsReader(new string[] { "80", @"..\..\..\..\Data\Batch", @"C:\temp" }));
-			//Main4(new ArgsReader(new string[] { "/P", "80", @"..\..\..\..\Data\Batch", @"C:\temp" }));
+			Main4(new ArgsReader(new string[] { "80", @"..\..\..\..\TestData\Batch", @"C:\temp" }));
+			//Main4(new ArgsReader(new string[] { "/P", "80", @"..\..\..\..\TestData\Batch", @"C:\temp" }));
 			//new Test0001().Test01();
 			//new Test0002().Test01();
 			//new Test0003().Test01();

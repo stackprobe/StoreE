@@ -19,51 +19,6 @@ namespace Charlotte
 			ProcMain.CUIMain(new Program().Main2);
 		}
 
-		// 以下様式統一のため用途別に好きな方を使ってね -- ★要削除
-
-#if true // 主にデバッガで実行するテスト用プログラム -- ★不要なら要削除
-		private void Main2(ArgsReader ar)
-		{
-			if (ProcMain.DEBUG)
-			{
-				Main3();
-			}
-			else
-			{
-				Main4();
-			}
-			SCommon.OpenOutputDirIfCreated();
-		}
-
-		private void Main3()
-		{
-			Main4();
-			SCommon.Pause();
-		}
-
-		private void Main4()
-		{
-			try
-			{
-				Main5();
-			}
-			catch (Exception ex)
-			{
-				ProcMain.WriteLog(ex);
-			}
-		}
-
-		private void Main5()
-		{
-			// -- choose one --
-
-			new Test0001().Test01();
-			//new Test0002().Test01();
-			//new Test0003().Test01();
-
-			// --
-		}
-#else // 主に実行ファイルにして使う/コマンド引数有り -- ★不要なら要削除
 		private void Main2(ArgsReader ar)
 		{
 			if (ProcMain.DEBUG)
@@ -83,7 +38,7 @@ namespace Charlotte
 #if DEBUG
 			// -- choose one --
 
-			Main4(new ArgsReader(new string[] { }));
+			Main4(new ArgsReader(new string[] { @"C:\temp\bat", @"C:\temp\run.bat" }));
 			//new Test0001().Test01();
 			//new Test0002().Test01();
 			//new Test0003().Test01();
@@ -103,7 +58,7 @@ namespace Charlotte
 			{
 				ProcMain.WriteLog(ex);
 
-				//MessageBox.Show("" + ex, Path.GetFileNameWithoutExtension(ProcMain.SelfFile) + " / エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("" + ex, Path.GetFileNameWithoutExtension(ProcMain.SelfFile) + " / エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 				//Console.WriteLine("Press ENTER key. (エラーによりプログラムを終了します)");
 				//Console.ReadLine();
@@ -112,8 +67,36 @@ namespace Charlotte
 
 		private void Main5(ArgsReader ar)
 		{
-			// TODO
+			string rootDir = SCommon.MakeFullPath(ar.NextArg());
+			string destFile = SCommon.MakeFullPath(ar.NextArg());
+
+			if (!Directory.Exists(rootDir))
+				throw new Exception("no rootDir");
+
+			if (Directory.Exists(destFile))
+				throw new Exception("Bad destFile");
+
+			ProcMain.WriteLog("rootDir: " + rootDir);
+			ProcMain.WriteLog("destFile: " + destFile);
+
+			List<string> destLines = new List<string>();
+
+			foreach (string file in Directory.GetFiles(rootDir, "*", SearchOption.AllDirectories).OrderBy(SCommon.Comp))
+			{
+				string ext = Path.GetExtension(file);
+
+				if (SCommon.EqualsIgnoreCase(ext, ".bat"))
+				{
+					destLines.Add(string.Format("START \"\" /D\"{0}\" /B /WAIT cmd /c \"{1}\"", Path.GetDirectoryName(file), Path.GetFileName(file)));
+				}
+				else if (SCommon.EqualsIgnoreCase(ext, ".exe"))
+				{
+					destLines.Add(string.Format("START \"\" /D\"{0}\" /B /WAIT \"{1}\"", Path.GetDirectoryName(file), Path.GetFileName(file)));
+				}
+			}
+			File.WriteAllLines(destFile, destLines, SCommon.ENCODING_SJIS);
+
+			ProcMain.WriteLog("done!");
 		}
-#endif
 	}
 }
